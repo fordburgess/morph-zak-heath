@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+.test-container {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  /* background-image: url('../../../assets/MORPH_COVER.jpg'); */
+  /* background-position: center; */
+  /* background-size: cover; */
+  /* transition: background-size 0.5s ease, background-position 0.5s ease; */
+  overflow: hidden;
+  font-family: 'Josefin Sans';
+}
+
+.test-container-zoomed {
+  background-size: 250% 250%;
+  background-position: 50% 50%;
+}
+
+.test-image {
+  /* content:url(../../../assets/OVERHEAD.png); */
+  object-position: center;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  transition: transform 0.2s ease-in-out, opacity 0.5s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  /* transform: scale(1.2); */
+}
+
+#mirror {
+  position: absolute;
+  top: 45%;
+  right: 30%;
+  z-index: 1;
+  color: #fff;
+  font-size: 1.5rem;
+}
