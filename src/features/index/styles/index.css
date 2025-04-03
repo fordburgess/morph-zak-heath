@@ -17,24 +17,53 @@
   background-position: 50% 50%;
 }
 
-.test-image {
-  /* content:url(../../../assets/OVERHEAD.png); */
+.first-image, .second-image {
   object-position: center;
   object-fit: cover;
-  height: 100%;
-  width: 100%;
-  transition: transform 0.2s ease-in-out, opacity 0.5s ease-in-out;
   position: absolute;
   top: 0;
   left: 0;
+  height: 100%;
+  width: 100%;
   z-index: 0;
-  /* transform: scale(1.2); */
 }
 
-#mirror {
+.first-image {
+  /* transition: transform 0.3s ease-in-out, opacity 1.2s ease-in-out; */
+  opacity: 1;
+}
+
+.second-image {
+  /* transition: opacity 0.5s ease-in-out; */
+  opacity: 0;
+  transform: scale(1.2);
+}
+
+#title-text {
+  font-size: 4rem;
+  margin: 0;
   position: absolute;
-  top: 45%;
-  right: 30%;
+  left: 50%;
+  top: 15%;
+  transform: translate(-50%, 10%);
+  z-index: 2;
+  color: #fff;
+  transition: opacity 0.3s;
+}
+
+.text-content {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#mirror-info {
+  position: absolute;
+  top: 40%;
+  right: 22%;
   z-index: 1;
   color: #fff;
   font-size: 1.5rem;
