@@ -17,6 +17,26 @@
   background-position: 50% 50%;
 }
 
+.svg-overlay {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  pointer-events: auto;
+  z-index: 2;
+}
+
+#camera-path {
+  transition: stroke 0.3s ease-in-out, fill 0.3s ease-in-out;
+}
+
+#camera-path:hover {
+  stroke: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+}
+
 .first-image, .second-image {
   object-position: center;
   object-fit: cover;
