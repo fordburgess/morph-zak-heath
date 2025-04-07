@@ -35,10 +35,33 @@ body {
   }
 }
 
+.clickable-subtitle {
+  font-style: italic;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 @media (min-width: 1000px) {
   .adam-reed-container {
-    padding: 100px 0;
+    padding: 50px 0;
     width: 60%;
     margin: 0 auto;
+  }
+
+  #adam-reed-blurb {
+    margin-bottom: 20px;
+  }
+
+  .portrait-1 {
+    width: 58%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .portrait-2 {
+    width: 38%;
+    object-fit: cover;
+    object-position: top;
   }
 }
