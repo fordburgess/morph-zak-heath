@@ -16,14 +16,14 @@ const LisaEldridgeView = () => {
       question: 'What name would you have chosen, if you could have been called anything else?',
       answer: 'Oh, my God, well, my mum was actually going to call me Nina. And then, last minute, she changed it to Lisa. At one point, I thought I would have preferred Nina—I like it better. Honestly, I don’t like Lisa.',
       x: CANVAS_WIDTH / 1,
-      y: 100,
+      y: 500,
       s: 0.8
     },
     {
       question: 'What were your first experiences with makeup?',
       answer: 'It started when I found my mum’s old makeup after we moved back to England from New Zealand. She had this box with little drawers, filled with 1960s makeup like Biba and Mary Quant that was really playful and colourful. Makeup from that era was designed for teenagers, so it had this childlike, crayon-like quality that I loved because of the objects and textures and for me, that was the turning point. I was also really inspired by the “vintageness”, because I knew it was old makeup and that was more interesting than modern makeup. I also used to draw on paper with it because it was more interesting than using regular crayons and art supplies. For my 13th birthday, I got a book on stage and theatrical makeup, and it blew my mind. The transformations, the way you could create light and shade, it was like art. I knew that’s what I wanted to do',
       x: CANVAS_WIDTH / 2,
-      y: 120,
+      y: 300,
       s: 0.8
     },
     {
@@ -113,7 +113,9 @@ const LisaEldridgeView = () => {
       const element = document.getElementById(`question-${index}`);
 
       if (element) {
-        element.style.transform = `translate(${newXWithNoise}px, ${newYWithNoise}px) scale(${question.s})`;
+        element.style.left = `${newXWithNoise}px`;
+        element.style.top = `${newYWithNoise}px`;
+        element.style.transform = `scale(${question.s})`;
       }
 
       // var restartPoint = image.width >
@@ -144,8 +146,20 @@ const LisaEldridgeView = () => {
     bubbles.forEach((bubble: HTMLDivElement, i: number) => {
 
       if (i !== index) {
-        bubble.style.transform = ''; // must remove initial transform property
-        bubble.classList.add('paused-position');
+        const randomX = (Math.floor(Math.random() * (window.innerWidth * 2)) - window.innerWidth) * 10;  // Random X outside screen width
+        const randomY = (Math.floor(Math.random() * (window.innerHeight * 2)) - window.innerHeight) * 10;
+        bubble.style.transition = 'top 5s cubic-bezier(0.25, 0.8, 0.25, 1), left 5s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.5s ease';
+
+        console.log(randomX)
+
+        bubble.style.left = `${randomX}px`;
+        bubble.style.top = `${randomY}px`;
+      }
+      else if (i == index) {
+        bubble.style.transition = 'top 1s cubic-bezier(0.25, 0.8, 0.25, 1), left 1s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.5s ease';
+        bubble.style.left = '50%';
+        bubble.style.left = '50%';
+        bubble.style.transform = 'translate(-50%, -50%)';
       }
     })
   }
