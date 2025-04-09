@@ -148,7 +148,7 @@ const LisaEldridgeView = () => {
       if (i !== index) {
         const randomX = (Math.floor(Math.random() * (window.innerWidth * 2)) - window.innerWidth) * 10;  // Random X outside screen width
         const randomY = (Math.floor(Math.random() * (window.innerHeight * 2)) - window.innerHeight) * 10;
-        bubble.style.transition = 'top 5s cubic-bezier(0.25, 0.8, 0.25, 1), left 5s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.5s ease';
+        bubble.style.transition = 'top 10s cubic-bezier(0.25, 0.8, 0.25, 1), left 10s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.5s ease';
 
         console.log(randomX)
 
@@ -157,9 +157,10 @@ const LisaEldridgeView = () => {
       }
       else if (i == index) {
         bubble.style.transition = 'top 1s cubic-bezier(0.25, 0.8, 0.25, 1), left 1s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.5s ease';
-        bubble.style.left = '50%';
-        bubble.style.left = '50%';
-        bubble.style.transform = 'translate(-50%, -50%)';
+        bubble.style.top = '40%';
+        bubble.style.left = '20%';
+        // bubble.style.transform = 'translate(-50%, -50%)';
+        bubble.classList.add('active');
       }
     })
   }
@@ -173,7 +174,8 @@ const LisaEldridgeView = () => {
         article.map((question: any, index: number) => {
           return (
             <div className='bubble' id={`question-${index}`} onClick={() => handleClick(index)}>
-
+              <h2>{question.question}</h2>
+              <p>{question.answer}</p>
             </div>
           )
         })
