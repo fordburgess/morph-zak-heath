@@ -144,17 +144,37 @@ const LisaEldridgeView = () => {
     bubbles.forEach((bubble: HTMLDivElement, i: number) => {
 
       if (i !== index) {
+
         bubble.style.transform = ''; // must remove initial transform property
-        bubble.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-in-out;'
-        bubble.classList.add('paused-position');
+        setTimeout(() => {
+          bubble.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-in-out;'
+          bubble.classList.add('paused-position');
+        }, 200);
       }
     })
   }
 
+  const handleContainerClick = () => {
+    if (activeIndex) {
+      const bubbles = document.querySelectorAll('.bubble');
+      bubbles.forEach((bubble: HTMLDivElement, i: number) => {
+        bubble.classList.remove('paused-position');
+      })
+
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+
+      requestAnimationFrame(animate);
+
+    }
+  }
+
   return (
-    <div className='article-container'>
+    <div className='article-container' onClick={() => handleContainerClick()}>
       <div className='lisa-eldridge-header'>
         <h1>In Conversation With Lisa Eldridge:</h1>
+        <h2>Becoming A World Class Makeup Artist</h2>
       </div>
       {
         article.map((question: any, index: number) => {
