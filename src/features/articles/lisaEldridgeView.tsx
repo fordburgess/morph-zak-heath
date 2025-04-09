@@ -46,6 +46,13 @@ const LisaEldridgeView = () => {
       x: CANVAS_WIDTH / 5,
       y: 90,
       s: 0.75
+    },
+    {
+      question: 'What was the first big show you worked on?',
+      answer: 'It was with Mary, assisting at shows like Rifat Ozbek in London and Romeo Gigli in Paris. I remember rushing through makeup at my first big show, and Mary told me to slow down and take my time. I was like, oh my god, okay!',
+      x: 0,
+      y: 130,
+      s: 0.75
     }
   ]
 
@@ -130,7 +137,7 @@ const LisaEldridgeView = () => {
     animationRef.current = requestAnimationFrame(animate);
   }
 
-  const [activeIndex, setActiveIndex] = useState<number>();
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const handleClick = (index: number) => {
     setActiveIndex(index);
@@ -145,17 +152,15 @@ const LisaEldridgeView = () => {
 
       if (i !== index) {
 
-        bubble.style.transform = ''; // must remove initial transform property
-        setTimeout(() => {
-          bubble.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-in-out;'
-          bubble.classList.add('paused-position');
-        }, 200);
+
+        bubble.classList.add('paused-position');
       }
     })
   }
 
   const handleContainerClick = () => {
     if (activeIndex) {
+      setActiveIndex(null);
       const bubbles = document.querySelectorAll('.bubble');
       bubbles.forEach((bubble: HTMLDivElement, i: number) => {
         bubble.classList.remove('paused-position');
@@ -166,7 +171,6 @@ const LisaEldridgeView = () => {
       }
 
       requestAnimationFrame(animate);
-
     }
   }
 
