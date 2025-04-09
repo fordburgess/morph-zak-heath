@@ -1,12 +1,10 @@
 body {
   background-color: #000;
   color: #fff;
-  overflow: hidden;
 }
 
 .article-container {
   position: relative;
-  box-sizing: border-box;
 }
 
 .lisa-eldridge-header {
@@ -19,17 +17,13 @@ body {
   height: 100px;
   width: 100px;
   background-color: white;
-  transition: opacity 0.3s ease-in-out;
 
   &:hover {
     cursor: pointer;
   }
 }
 
-.active-section {
-
-}
-
 .paused-position {
-  opacity: 0;
+  transition: transform 0.8s, opacity 0.3s ease-in-out;
+  transform: translateX(10px) scale(0.9);
 }

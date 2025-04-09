@@ -46,13 +46,6 @@ const LisaEldridgeView = () => {
       x: CANVAS_WIDTH / 5,
       y: 90,
       s: 0.75
-    },
-    {
-      question: 'What was the first big show you worked on?',
-      answer: 'It was with Mary, assisting at shows like Rifat Ozbek in London and Romeo Gigli in Paris. I remember rushing through makeup at my first big show, and Mary told me to slow down and take my time. I was like, oh my god, okay!',
-      x: 0,
-      y: 130,
-      s: 0.75
     }
   ]
 
@@ -137,7 +130,7 @@ const LisaEldridgeView = () => {
     animationRef.current = requestAnimationFrame(animate);
   }
 
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState<number>();
 
   const handleClick = (index: number) => {
     setActiveIndex(index);
@@ -151,34 +144,16 @@ const LisaEldridgeView = () => {
     bubbles.forEach((bubble: HTMLDivElement, i: number) => {
 
       if (i !== index) {
-
-
+        bubble.style.transform = ''; // must remove initial transform property
         bubble.classList.add('paused-position');
       }
     })
   }
 
-  const handleContainerClick = () => {
-    if (activeIndex) {
-      setActiveIndex(null);
-      const bubbles = document.querySelectorAll('.bubble');
-      bubbles.forEach((bubble: HTMLDivElement, i: number) => {
-        bubble.classList.remove('paused-position');
-      })
-
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-
-      requestAnimationFrame(animate);
-    }
-  }
-
   return (
-    <div className='article-container' onClick={() => handleContainerClick()}>
+    <div className='article-container'>
       <div className='lisa-eldridge-header'>
         <h1>In Conversation With Lisa Eldridge:</h1>
-        <h2>Becoming A World Class Makeup Artist</h2>
       </div>
       {
         article.map((question: any, index: number) => {
