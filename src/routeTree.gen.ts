@@ -11,10 +11,17 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as LisaEldridgeImport } from './routes/lisaEldridge'
 import { Route as AdamReedImport } from './routes/adamReed'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const LisaEldridgeRoute = LisaEldridgeImport.update({
+  id: '/lisaEldridge',
+  path: '/lisaEldridge',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AdamReedRoute = AdamReedImport.update({
   id: '/adamReed',
@@ -46,6 +53,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdamReedImport
       parentRoute: typeof rootRoute
     }
+    '/lisaEldridge': {
+      id: '/lisaEldridge'
+      path: '/lisaEldridge'
+      fullPath: '/lisaEldridge'
+      preLoaderRoute: typeof LisaEldridgeImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -54,36 +68,41 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/adamReed': typeof AdamReedRoute
+  '/lisaEldridge': typeof LisaEldridgeRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/adamReed': typeof AdamReedRoute
+  '/lisaEldridge': typeof LisaEldridgeRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/adamReed': typeof AdamReedRoute
+  '/lisaEldridge': typeof LisaEldridgeRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/adamReed'
+  fullPaths: '/' | '/adamReed' | '/lisaEldridge'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/adamReed'
-  id: '__root__' | '/' | '/adamReed'
+  to: '/' | '/adamReed' | '/lisaEldridge'
+  id: '__root__' | '/' | '/adamReed' | '/lisaEldridge'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdamReedRoute: typeof AdamReedRoute
+  LisaEldridgeRoute: typeof LisaEldridgeRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdamReedRoute: AdamReedRoute,
+  LisaEldridgeRoute: LisaEldridgeRoute,
 }
 
 export const routeTree = rootRoute
@@ -97,7 +116,8 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/adamReed"
+        "/adamReed",
+        "/lisaEldridge"
       ]
     },
     "/": {
@@ -105,6 +125,9 @@ export const routeTree = rootRoute
     },
     "/adamReed": {
       "filePath": "adamReed.tsx"
+    },
+    "/lisaEldridge": {
+      "filePath": "lisaEldridge.tsx"
     }
   }
 }

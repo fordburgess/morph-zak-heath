@@ -1,0 +1,29 @@
+body {
+  background-color: #000;
+  color: #fff;
+}
+
+.article-container {
+  position: relative;
+}
+
+.lisa-eldridge-header {
+  padding: 50px;
+  text-align: left;
+}
+
+.bubble {
+  border-radius: 500px;
+  height: 100px;
+  width: 100px;
+  background-color: white;
+  transition: transform 0.8s, opacity 0.3s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.paused-position {
+  transform: translateX(10px) scale(0.9);
+}

@@ -1,4 +1,4 @@
-import './adamReed.css'
+import './styles/adamReed.css'
 import Portrai1 from '../../assets/adam-reed.webp'
 import Portrai2 from '../../assets/adam-reed-2.jpeg'
 import { motion } from 'framer-motion'
