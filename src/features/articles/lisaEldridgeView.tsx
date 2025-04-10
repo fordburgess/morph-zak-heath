@@ -96,6 +96,7 @@ const LisaEldridgeView = () => {
     }
   }, [])
 
+  const positionsRef = useRef<{ left: number; top: number }[]>([]);
   function animate() {
     articleRef.current = articleRef.current.map((question, index)=> {
       const newNoiseSeedX = question.noiseSeedX + NOISE_SPEED;
@@ -113,12 +114,15 @@ const LisaEldridgeView = () => {
       const element = document.getElementById(`question-${index}`);
 
       if (element) {
+        if (!positionsRef.current[index]) {
+          positionsRef.current[index] = { newXWithNoise, newYWithNoise };
+        }
+
         element.style.left = `${newXWithNoise}px`;
         element.style.top = `${newYWithNoise}px`;
         element.style.transform = `scale(${question.s})`;
       }
 
-      // var restartPoint = image.width >
       return {
         ...question,
         noiseSeedX: newNoiseSeedX,
@@ -132,41 +136,66 @@ const LisaEldridgeView = () => {
     animationRef.current = requestAnimationFrame(animate);
   }
 
-  const [activeIndex, setActiveIndex] = useState<number>();
+  const [activeIndex, setActiveIndex] = useState<number | null>();
+  const [bubblePositions, setBubblePositions] = useState([]);
 
   const handleClick = (index: number) => {
-    setActiveIndex(index);
+    if (activeIndex == null) {
 
-    if (animationRef.current) {
-      cancelAnimationFrame(animationRef.current);
+      setActiveIndex(index);
+
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+
+      const bubbles = document.querySelectorAll('.bubble');
+      bubbles.forEach((bubble: HTMLDivElement, i: number) => {
+
+        if (i !== index) {
+          const randomX = (Math.floor(Math.random() * (window.innerWidth * 2)) - window.innerWidth);  // Random X outside screen width
+          const randomY = (Math.floor(Math.random() * (window.innerHeight * 2)) - window.innerHeight);
+          bubble.style.transition = 'top 5s cubic-bezier(0.25, 0.8, 0.25, 1), left 5s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.5s ease';
+
+          bubble.style.left = `${randomX}px`;
+          bubble.style.top = `${randomY}px`;
+        }
+        else if (i == index) {
+          bubble.style.transition = 'top 2s cubic-bezier(0.25, 0.8, 0.25, 1), left 2s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.5s ease';
+          bubble.style.top = '40%';
+          bubble.style.left = '20%';
+          // bubble.style.transform = 'translate(-50%, -50%)';
+          bubble.classList.add('active');
+        }
+      })
     }
+  }
 
-    const bubbles = document.querySelectorAll('.bubble');
+  const handleContainerClick = () => {
+    if (activeIndex) {
+      setActiveIndex(null);
 
-    bubbles.forEach((bubble: HTMLDivElement, i: number) => {
+      const bubbles = document.querySelectorAll('.bubble');
 
-      if (i !== index) {
-        const randomX = (Math.floor(Math.random() * (window.innerWidth * 2)) - window.innerWidth) * 10;  // Random X outside screen width
-        const randomY = (Math.floor(Math.random() * (window.innerHeight * 2)) - window.innerHeight) * 10;
-        bubble.style.transition = 'top 10s cubic-bezier(0.25, 0.8, 0.25, 1), left 10s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.5s ease';
+      bubbles.forEach((bubble: HTMLDivElement, i: number) => {
+        const pos = positionsRef.current[i];
+        if (!pos) return;
 
-        console.log(randomX)
+        bubble.style.transition = 'top 2s cubic-bezier(0.25, 0.8, 0.25, 1), left 2s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.5s ease';
+        bubble.style.left = `${pos.left}px`;
+        bubble.style.top = `${pos.top}px`;
+        bubble.classList.remove('active');
+        setTimeout(() => {
+          bubble.style.transition = '';
+        }, 2000);
+      });
 
-        bubble.style.left = `${randomX}px`;
-        bubble.style.top = `${randomY}px`;
-      }
-      else if (i == index) {
-        bubble.style.transition = 'top 1s cubic-bezier(0.25, 0.8, 0.25, 1), left 1s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.5s ease';
-        bubble.style.top = '40%';
-        bubble.style.left = '20%';
-        // bubble.style.transform = 'translate(-50%, -50%)';
-        bubble.classList.add('active');
-      }
-    })
+      animationRef.current = requestAnimationFrame(animate); // Resume animation if needed
+      return;
+    }
   }
 
   return (
-    <div className='article-container'>
+    <div className='article-container' onClick={() => handleContainerClick()}>
       <div className='lisa-eldridge-header'>
         <h1>In Conversation With Lisa Eldridge:</h1>
       </div>
