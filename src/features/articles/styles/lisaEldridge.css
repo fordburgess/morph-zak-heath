@@ -1,6 +1,14 @@
 body {
-  background-color: #000;
-  color: #fff;
+  background: linear-gradient(120deg, #FDEBD2, #F8D5C3, #FDF6F0);
+  color: #5C3A2E;
+}
+
+.article-title {
+  font-size: 3rem;
+}
+
+.article-subtitle {
+  font-size: 2rem;
 }
 
 .article-container {
@@ -18,14 +26,29 @@ body {
 .bubble {
   position: absolute;
   border-radius: 500px;
-  height: 100px;
-  width: 100px;
-  background-color: white;
+  height: 250px;
+  width: 250px;
+  background:
+  linear-gradient(to bottom right, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3)) border-box,
+  #ffffff padding-box;
   color: #000;
   z-index: 5;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
 
-  h2, p {
+  h3 {
+    font-family: 'Josefin Sans';
+    font-weight: 300;
+    font-size: 1.25rem;
+  }
+
+  p {
     display: none;
+    font-family: 'Josefin Sans';
+    font-weight: 300;
   }
 
   &:hover {
@@ -36,11 +59,25 @@ body {
 .active {
   z-index: 10;
   height: auto;
-  width: 50%;
-  padding: 20px;
-  border-radius: 10px;
+  width: auto;
+  /* max-width: 900px; */
+  padding: 190px;
+  border-radius: 48%;
+  box-sizing: border-box;
+
 
   h2, p {
     display: block;
+  }
+}
+
+.active-text-container {
+  text-align: left;
+  h3 {
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: 1.25rem;
   }
 }

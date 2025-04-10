@@ -16,36 +16,50 @@ const LisaEldridgeView = () => {
       question: 'What name would you have chosen, if you could have been called anything else?',
       answer: 'Oh, my God, well, my mum was actually going to call me Nina. And then, last minute, she changed it to Lisa. At one point, I thought I would have preferred Nina—I like it better. Honestly, I don’t like Lisa.',
       x: CANVAS_WIDTH / 1,
-      y: 500,
-      s: 0.8
+      y: 220,
+      s: 0.9
     },
     {
       question: 'What were your first experiences with makeup?',
       answer: 'It started when I found my mum’s old makeup after we moved back to England from New Zealand. She had this box with little drawers, filled with 1960s makeup like Biba and Mary Quant that was really playful and colourful. Makeup from that era was designed for teenagers, so it had this childlike, crayon-like quality that I loved because of the objects and textures and for me, that was the turning point. I was also really inspired by the “vintageness”, because I knew it was old makeup and that was more interesting than modern makeup. I also used to draw on paper with it because it was more interesting than using regular crayons and art supplies. For my 13th birthday, I got a book on stage and theatrical makeup, and it blew my mind. The transformations, the way you could create light and shade, it was like art. I knew that’s what I wanted to do',
       x: CANVAS_WIDTH / 2,
-      y: 300,
+      y: 275,
       s: 0.8
     },
     {
       question: 'When you were 21, who did you look up to in the beauty industry?',
       answer: 'Probably Mary Greenwell. She was the makeup artist doing all the Vogue covers at the time. When I was a teenager, I’d use my pocket money to buy Vogue magazines and dream about having a career like hers. She was doing the makeup for literally every major cover. And then, two years later, I was working with her. It was a dream come true.',
       x: CANVAS_WIDTH / 3,
-      y: 150,
+      y: 500,
       s: 0.9
     },
     {
       question: 'Did you face any setbacks when you entered the industry?',
       answer: 'Oh, absolutely. I didn’t know anyone in the industry, and there wasn’t any internet back then to guide me, so it was tricky to figure out, especially wanting to go into the fashion industry. I’d buy magazines to study credits like "Mary Greenwell for Debbie Walters" and figure out which agency to call and who was repping each other. Networking was painstaking, you had to meet people at clubs or get in touch with agencies directly and say, “I would love to assist, or something”. I did a lot of unpaid work to build my portfolio, working with new models like Kate Moss who were just coming into the industry. At one point, I heard someone say they got a magazine cover because their boyfriend was the editor, and I remember thinking, oh my god, I hope it’s literally not going to come down to who you know. But in the end, hard work and perseverance paid off. By the time I was 23, I was signed by an agency alongside legends like Sam McKnight, Mary Greenwell and major major people - I was kind of the baby. That was huge. At first, I was asked why I wanted to assist, but I had only worked with up-and-coming models and I didn’t know how to react when a big supermodel or celebrity walked into the room; however, I quickly learnt that you just treat everybody the same.',
       x: CANVAS_WIDTH / 4,
-      y: 200,
-      s: 0.9
+      y: 400,
+      s: 1.1
     },
     {
       question: 'What was your favourite club when you were 21?',
       answer: 'The WAG Club was the place to be. So many cool people in fashion and creative industries hung out there. Clubs like that were great for meeting people and building connections. I’d speak to the people from Models One and ask whether they had any new models and that’s how I got my portfolio together.',
       x: CANVAS_WIDTH / 5,
-      y: 90,
+      y: 575,
       s: 0.75
+    },
+    {
+      question: 'What was the first big show you worked on?',
+      answer: 'It was with Mary, assisting at shows like Rifat Ozbek in London and Romeo Gigli in Paris. I remember rushing through makeup at my first big show, and Mary told me to slow down and take my time. I was like, oh my god, okay!',
+      x: CANVAS_WIDTH / 6,
+      y: 250,
+      s: 0.9
+    },
+    {
+      question: 'What advice would you give your 21-year-old self?',
+      answer: 'I’d tell her to stay confident and not compare herself to others but explore the ideas she had and wanted to share. In a creative industry, it’s fuelled by ideas, there’s no such thing as a bad one. I wish I’d spoken up more on shoots when I had ideas. Now, I’m much more comfortable experimenting. For instance, I recently tried a bold blue eyeshadow look during a Claudia Schiffer shoot for Pop Magazine. It didn’t work, and we took it off, but that’s okay! It’s all part of the creative process. Don’t think you’re silly or something and don’t be afraid to explore, speak your mind, and trust your instincts. There’s good ideas, bad ideas, but actually they’re all good.',
+      x: CANVAS_WIDTH / 7,
+      y: 300,
+      s: 1.1,
     }
   ]
 
@@ -152,8 +166,13 @@ const LisaEldridgeView = () => {
       bubbles.forEach((bubble: HTMLDivElement, i: number) => {
 
         if (i !== index) {
-          const randomX = (Math.floor(Math.random() * (window.innerWidth * 2)) - window.innerWidth);  // Random X outside screen width
-          const randomY = (Math.floor(Math.random() * (window.innerHeight * 2)) - window.innerHeight);
+          // const randomX = (Math.floor(Math.random() * (window.innerWidth * 2)) - window.innerWidth * 2);
+          // const randomY = (Math.floor(Math.random() * (window.innerHeight * 2)) - window.innerHeight);
+          const randomX = Math.random() < 0.5 ? -Math.abs(Math.random() * (2000 - 1000) + 1000) : Math.abs(Math.random() * (2000 - 1000) + 1000);
+          const randomY = Math.random() < 0.5 ? -Math.abs(Math.random() * (2000 - 1000) + 1000) : Math.abs(Math.random() * (2000 - 1000) + 1000);
+
+          console.log({randomX, randomY})
+
           bubble.style.transition = 'top 5s cubic-bezier(0.25, 0.8, 0.25, 1), left 5s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.5s ease';
 
           bubble.style.left = `${randomX}px`;
@@ -161,10 +180,11 @@ const LisaEldridgeView = () => {
         }
         else if (i == index) {
           bubble.style.transition = 'top 2s cubic-bezier(0.25, 0.8, 0.25, 1), left 2s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.5s ease';
-          bubble.style.top = '40%';
-          bubble.style.left = '20%';
+          bubble.style.top = '10%';
+          bubble.style.left = '0%';
           // bubble.style.transform = 'translate(-50%, -50%)';
-          bubble.classList.add('active');
+          // bubble.classList.add('active');
+          document.getElementById(`text-container-${index}`)?.classList.add('active-text-container');
         }
       })
     }
@@ -186,7 +206,7 @@ const LisaEldridgeView = () => {
         bubble.classList.remove('active');
         setTimeout(() => {
           bubble.style.transition = '';
-        }, 2000);
+        }, 4000);
       });
 
       animationRef.current = requestAnimationFrame(animate); // Resume animation if needed
@@ -197,14 +217,17 @@ const LisaEldridgeView = () => {
   return (
     <div className='article-container' onClick={() => handleContainerClick()}>
       <div className='lisa-eldridge-header'>
-        <h1>In Conversation With Lisa Eldridge:</h1>
+        <h1 className='article-title'>In Conversation With Lisa Eldridge:</h1>
+        <h2 className='article-subtitle'>Becoming A World Class Makeup Artist</h2>
       </div>
       {
         article.map((question: any, index: number) => {
           return (
             <div className='bubble' id={`question-${index}`} onClick={() => handleClick(index)}>
-              <h2>{question.question}</h2>
-              <p>{question.answer}</p>
+              <div id={`text-container-${index}`}>
+                <h3>{question.question}</h3>
+                <p>{question.answer}</p>
+              </div>
             </div>
           )
         })
