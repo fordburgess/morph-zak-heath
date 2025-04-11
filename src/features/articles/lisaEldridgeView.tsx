@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import { Noise } from 'noisejs';
 import './styles/articles.css';
 import './styles/lisaEldridge.css';
+import Image1 from '../../assets/lisa-eldridge-1.webp';
+import Image8 from '../../assets/lisa-eldridge-8.webp'
 
 const LisaEldridgeView = () => {
   const windowWidth = 2000;
@@ -12,6 +14,12 @@ const LisaEldridgeView = () => {
   const noise = new Noise();
 
   const article = [
+    {
+      image: Image1,
+      x: 600,
+      y: 275,
+      s: 0.95
+    },
     {
       question: 'What name would you have chosen, if you could have been called anything else?',
       answer: 'Oh, my God, well, my mum was actually going to call me Nina. And then, last minute, she changed it to Lisa. At one point, I thought I would have preferred Nina—I like it better. Honestly, I don’t like Lisa.',
@@ -32,6 +40,12 @@ const LisaEldridgeView = () => {
       x: CANVAS_WIDTH / 3,
       y: 500,
       s: 0.9
+    },
+    {
+      image: Image8,
+      x: 400,
+      y: 200,
+      s: 0.8
     },
     {
       question: 'Did you face any setbacks when you entered the industry?',
@@ -125,7 +139,7 @@ const LisaEldridgeView = () => {
       const newXWithNoise = newX + randomX * NOISE_AMOUNT;
       const newYWithNoise = newY + randomY * 5;
 
-      const element = document.getElementById(`question-${index}`);
+      const element = document.getElementById(`item-${index}`);
 
       if (element) {
         if (!positionsRef.current[index]) {
@@ -150,7 +164,7 @@ const LisaEldridgeView = () => {
     animationRef.current = requestAnimationFrame(animate);
   }
 
-  const [activeIndex, setActiveIndex] = useState<number | null>();
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [bubblePositions, setBubblePositions] = useState([]);
 
   const handleClick = (index: number) => {
@@ -171,27 +185,36 @@ const LisaEldridgeView = () => {
           const randomX = Math.random() < 0.5 ? -Math.abs(Math.random() * (2000 - 1000) + 1000) : Math.abs(Math.random() * (2000 - 1000) + 1000);
           const randomY = Math.random() < 0.5 ? -Math.abs(Math.random() * (2000 - 1000) + 1000) : Math.abs(Math.random() * (2000 - 1000) + 1000);
 
-          console.log({randomX, randomY})
-
-          bubble.style.transition = 'top 5s cubic-bezier(0.25, 0.8, 0.25, 1), left 5s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.5s ease';
+          bubble.style.transition = `
+            height 15s cubic-bezier(0.25, 0.8, 0.25, 1),
+            width 15s cubic-bezier(0.25, 0.8, 0.25, 1),
+            top 5s cubic-bezier(0.25, 0.8, 0.25, 1),
+            left 5s cubic-bezier(0.25, 0.8, 0.25, 1),
+            transform 0.5s ease
+          `
 
           bubble.style.left = `${randomX}px`;
           bubble.style.top = `${randomY}px`;
         }
         else if (i == index) {
           bubble.style.transition = 'top 2s cubic-bezier(0.25, 0.8, 0.25, 1), left 2s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.5s ease';
-          bubble.style.top = '10%';
-          bubble.style.left = '0%';
+          bubble.style.top = '5%';
+          bubble.style.left = '5%';
           // bubble.style.transform = 'translate(-50%, -50%)';
-          // bubble.classList.add('active');
+          bubble.classList.add('active');
           document.getElementById(`text-container-${index}`)?.classList.add('active-text-container');
         }
       })
     }
   }
 
+  useEffect(() => {
+    console.log(activeIndex)
+  }, [activeIndex])
+
   const handleContainerClick = () => {
-    if (activeIndex) {
+    console.log(`Active index: ${activeIndex}`)
+    if (activeIndex !== null) {
       setActiveIndex(null);
 
       const bubbles = document.querySelectorAll('.bubble');
@@ -204,6 +227,7 @@ const LisaEldridgeView = () => {
         bubble.style.left = `${pos.left}px`;
         bubble.style.top = `${pos.top}px`;
         bubble.classList.remove('active');
+        document.getElementById(`text-container-${i}`)?.classList.remove('active-text-container');
         setTimeout(() => {
           bubble.style.transition = '';
         }, 4000);
@@ -222,12 +246,30 @@ const LisaEldridgeView = () => {
       </div>
       {
         article.map((question: any, index: number) => {
+
           return (
-            <div className='bubble' id={`question-${index}`} onClick={() => handleClick(index)}>
-              <div id={`text-container-${index}`}>
-                <h3>{question.question}</h3>
-                <p>{question.answer}</p>
-              </div>
+            <div
+              className='bubble'
+              id={`item-${index}`}
+              onClick={() => handleClick(index)}
+              style={{
+                padding: question.image ? '0' : '10px',
+                overflow: 'hidden'
+              }}
+            >
+              {
+                question.image && (
+                  <img src={question.image} />
+                )
+              }
+              {
+                question.question && (
+                  <div id={`text-container-${index}`}>
+                    <h3>{question.question}</h3>
+                    <p>{question.answer}</p>
+                  </div>
+                )
+              }
             </div>
           )
         })
