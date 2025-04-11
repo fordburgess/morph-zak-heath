@@ -59,10 +59,8 @@
   opacity: 1;
 }
 
-.second-image {
-  /* transition: opacity 0.5s ease-in-out; */
-  opacity: 0;
-  transform: scale(1.2);
+#svg-bg-image {
+  transition: filter 1s cubic-bezier(0.25, 0.8, 0.25, 1);;
 }
 
 #title-text {
@@ -75,6 +73,11 @@
   z-index: 2;
   color: #fff;
   transition: opacity 0.3s;
+}
+
+.info-box {
+  z-index: 5;
+  color: #000;
 }
 
 .text-content {
@@ -94,3 +97,26 @@
   color: #fff;
   font-size: 1.5rem;
 }
+
+.pointer-line {
+  display: none;
+  stroke-dasharray: 1450;
+  stroke-dashoffset: 1450;
+  animation: draw-appear 1s ease-out forwards;
+}
+
+/* .pointer-line-exit {
+  animation: draw-exit 1s ease-out backwards;
+} */
+
+@keyframes draw-appear {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* @keyframes draw-exit {
+  to {
+    stroke-dashoffset: 1450;
+  }
+} */

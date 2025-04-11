@@ -46,22 +46,34 @@ const IndexView = () => {
 
   const handleHover = (id: string) => {
     const fillPath = document.getElementById(`${id}-fill`);
+    const pointerLine = document.getElementById(`${id}-pointer-line`);
+    const bgImage = document.getElementById('svg-bg-image');
 
-    if (fillPath) {
+    if (fillPath && pointerLine && bgImage) {
       fillPath.style.stroke = 'rgba(239, 250, 255, 1)';
       fillPath.style.strokeWidth = '5px';
       fillPath.style.fill = 'rgba(239, 250, 255, 0.25)';
       fillPath.classList.add('glow');
+
+      pointerLine.style.display = 'block';
+
+      bgImage.style.filter = 'brightness(75%)';
     }
   }
 
   const handleExit = (id: string) => {
     const fillPath = document.getElementById(`${id}-fill`);
+    const pointerLine = document.getElementById(`${id}-pointer-line`);
+    const bgImage = document.getElementById('svg-bg-image');
 
-    if (fillPath) {
+    if (fillPath && pointerLine && bgImage) {
       fillPath.style.stroke = 'none';
       fillPath.style.strokeWidth = '0';
       fillPath.style.fill = 'rgba(0, 0, 0, 0.01)';
+
+      pointerLine.style.display = 'none';
+
+      bgImage.style.filter = 'brightness(100%)';
     }
   }
 
@@ -70,13 +82,10 @@ const IndexView = () => {
       <h1 id="title-text">MORPH</h1>
       <img src={entrance} className='first-image'/>
       <svg className="svg-overlay" viewBox="0 0 5120 2880" version="1.1" xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-        <g id="bg-image">
+        <g id="svg-bg-image">
           <image width="100%" height="100%" preserveAspectRatio="xMinYMin meet" xlinkHref={overhead} />
         </g>
         <g id="layer-outline">
-          <rect x="2600" y="850" height="100px" width="100px" fill="#000">
-            <text fill="white" fontSize="100">Hello World</text>
-          </rect>
           <path id="A-fill" name="A" fill="rgba(0, 0, 0, 0.01)" d="m2878 1374c-36.85-1.812-68.57-3.684-70.49-4.16-2.381-0.5903-3.766-1.652-4.36-3.341-0.5836-1.66 0.5054-13.51 3.304-35.96 3.977-31.9 4.265-36.08 6.084-88.49 1.05-30.25 1.924-60.18 1.941-66.5 0.039-14.06 1.15-18.72 4.79-20.1 3.558-1.353 202.1 6.591 207.6 8.308 7.01 2.173 6.813-1.526 3.609 67.79-1.589 34.38-3.298 74.78-3.798 89.79-0.5003 15.01-1.147 27.52-1.437 27.81-0.9167 0.9166-28.44-1.371-30.63-2.546-1.272-0.681-2.1-2.108-2.1-3.62 0-4.827-6.918-4.459-8.963 0.4765-1.074 2.592-1.596 2.874-4.462 2.409-6.109-0.9914-16.47 6.298-15.09 10.62 0.4199 1.323-0.1672 3.843-1.571 6.742-1.951 4.031-2.113 5.257-1.249 9.473l0.992 4.843-8.577-0.1291c-4.717-0.071-38.73-1.612-75.58-3.424z" />
           <path id="B-fill" name="B" fill="rgba(0, 0, 0, 0.01)" d="m2561 860.9-4.28-8.392-0.696-25c-0.3827-13.75-0.5185-25.19-0.3016-25.42 0.5819-0.6157 45.81-2.947 46.39-2.391 0.275 0.2605 0.6564 10.6 0.8476 22.98l0.3477 22.5 4.402 9.485c2.421 5.217 4.402 10.06 4.402 10.77 0 1.31-3.04 1.595-34.17 3.201l-12.67 0.6538z" />
           <path id="C-fill" name="C" fill="rgba(0, 0, 0, 0.01)" d="m2421 1170c-3.413-10.69-3.464-11.12-4.128-34.48-0.3702-13.01-0.3112-23.87 0.131-24.13 0.4423-0.2605 10.76-0.7973 22.92-1.193l22.11-0.7191 1.481 43.62 3.932 10.98c2.162 6.036 3.733 11.49 3.491 12.12-0.287 0.7481-7.174 1.568-19.79 2.357-10.64 0.6653-21 1.45-23.02 1.744l-3.676 0.5338z" />
@@ -108,20 +117,19 @@ const IndexView = () => {
           <path onMouseEnter={() => handleHover('M')} onMouseLeave={() => handleExit('M')} data-outline="M" data-annotation="..." fill="rgba(0, 0, 0, 0.01)" d="m2535 1961c-0.218-0.6298-2.673-17.48-5.455-37.43-4.72-33.86-5-36.99-4.181-46.77 0.4828-5.763 1.125-10.73 1.428-11.03 0.7407-0.7407 70.98-6.511 71.61-5.883 0.272 0.272 3.715 23.03 7.65 50.58 4.79 33.53 6.797 50.19 6.07 50.41-0.5971 0.1805-18.11 0.5407-38.91 0.8005-27.88 0.3482-37.93 0.1714-38.22-0.6726z" />
           <path onMouseEnter={() => handleHover('N')} onMouseLeave={() => handleExit('N')} data-outline="N" data-annotation="bottle of genie" fill="rgba(0, 0, 0, 0.01)" d="m2742 2059-9.658-28.35 17.92-54.32h38.57l18.5 61-16.96 49.5-38.73 0.5268z" />
         </g>
+        <g id="info-boxes">
+          <path
+            d="M3100 1275 L3100 1200 L3500 1200"
+            stroke="#fff"
+            strokeWidth="5"
+            fill="none"
+            className='pointer-line'
+            id='F-pointer-line'
+          />
+          {/* <rect className='info-box' x="3081" y="1370" width="100" height="100" rx="15" fill="#fff" />
+          <text id="F-info" className='info-text' x="3081" y="1370" fill="#000">Lisa Eldridge</text> */}
+        </g>
       </svg>
-
-
-
-
-
-
-
-
-      <div className="text-content">
-        {/* <div id="mirror-info">
-          <p>Zak Heath</p>
-        </div> */}
-      </div>
     </div>
   )
 }
