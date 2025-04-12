@@ -99,10 +99,21 @@
 }
 
 .pointer-line {
-  display: none;
+  /* display: none; */
   stroke-dasharray: 1450;
   stroke-dashoffset: 1450;
   animation: draw-appear 1s ease-out forwards;
+}
+
+.info-box {
+  display: block;
+  visibility: none;
+  opacity: 0;
+  transition: opacity 2s ease-in-out forwards;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 /* .pointer-line-exit {

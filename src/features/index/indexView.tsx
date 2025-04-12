@@ -45,8 +45,20 @@ const IndexView = () => {
   }
 
   const handleHover = (id: string) => {
+    const pathVals = {
+      'D' : 'm3140 825 L3140 650 L3500 500',
+      'F' : 'm3100 1275 L3100 1200 L3500 1200',
+      'G' : 'm3060 1431 L2900 1575 L2775 1575',
+      'H' : 'm3115 1498 L3115 1675 L3275 1900',
+      'J' : 'm3265 1544 L3265 1700 L3700 1700',
+      'K' : 'm2275 1200 L2100 1200 L2100 1000',
+      'L' : 'm2240 1950 L2240 2150 L2000 2300',
+      'N' : 'm2772 1965 L2772 1900 L3500 1900',
+    }
+
+    const pointerLine = document.querySelector('.pointer-line');
     const fillPath = document.getElementById(`${id}-fill`);
-    const pointerLine = document.getElementById(`${id}-pointer-line`);
+    const infoBox = document.getElementById(`${id}-box`);
     const bgImage = document.getElementById('svg-bg-image');
 
     if (fillPath && pointerLine && bgImage) {
@@ -55,15 +67,18 @@ const IndexView = () => {
       fillPath.style.fill = 'rgba(239, 250, 255, 0.25)';
       fillPath.classList.add('glow');
 
+      pointerLine.setAttribute('d', pathVals[id]);
       pointerLine.style.display = 'block';
-
-      bgImage.style.filter = 'brightness(75%)';
+      bgImage.style.filter = 'brightness(85%)';
+      infoBox.style.visibility = 'visible';
+      infoBox.style.opacity = '1';
     }
   }
 
   const handleExit = (id: string) => {
     const fillPath = document.getElementById(`${id}-fill`);
-    const pointerLine = document.getElementById(`${id}-pointer-line`);
+    const pointerLine = document.querySelector('.pointer-line');
+    // const infoBox = document.getElementById(`${id}-box`);
     const bgImage = document.getElementById('svg-bg-image');
 
     if (fillPath && pointerLine && bgImage) {
@@ -71,7 +86,10 @@ const IndexView = () => {
       fillPath.style.strokeWidth = '0';
       fillPath.style.fill = 'rgba(0, 0, 0, 0.01)';
 
+      pointerLine.setAttribute('d', '');
       pointerLine.style.display = 'none';
+      // infoBox.style.visibility = 'none';
+      // infoBox.style.opacity = '0';
 
       bgImage.style.filter = 'brightness(100%)';
     }
@@ -82,6 +100,15 @@ const IndexView = () => {
       <h1 id="title-text">MORPH</h1>
       <img src={entrance} className='first-image'/>
       <svg className="svg-overlay" viewBox="0 0 5120 2880" version="1.1" xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
+        <defs>
+          <filter id="soft-glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blurred" />
+            <feFlood floodColor="rgba(255, 255, 255, 0.7)" result="colored" />
+            <feComposite in2="blurred" operator="in" />
+            <feComposite in2="SourceAlpha" operator="in" />
+            <feComposite in2="colored" operator="over" />
+          </filter>
+        </defs>
         <g id="svg-bg-image">
           <image width="100%" height="100%" preserveAspectRatio="xMinYMin meet" xlinkHref={overhead} />
         </g>
@@ -113,21 +140,21 @@ const IndexView = () => {
           <path onMouseEnter={() => handleHover('I')} onMouseLeave={() => handleExit('I')} data-outline="I" data-annotation="..." d="m3384 1498-12.81-0.313-12.44-18.99c-9.567-14.6-12.43-19.73-12.41-22.22 0.064-5.869 7.502-75.6 8.131-76.23 0.7959-0.7959 38.83-11.48 40.91-11.49 1.567-0.01 17.58 8.25 19.27 9.936 0.7675 0.7675-0.965 62.32-2.992 106.3l-0.6337 13.75-7.11-0.2173c-3.91-0.1196-12.87-0.3582-19.92-0.5303z" />
           <path onMouseEnter={() => handleHover('J')} onMouseLeave={() => handleExit('J')} data-outline="J" data-annotation="camera" fill="rgba(0, 0, 0, 0.01)" d="m3242 1544-49.5-7.936-15.75-15.7c-11.97-11.93-15.75-16.3-15.75-18.21 0-1.381 0.7679-7.809 1.712-14.28l1.716-11.77 50.04-30.15c27.52-16.58 53.32-31.67 57.34-33.53l7.303-3.385 35.67 30.61 17.03 33-2.152 36.67c-1.184 20.17-2.46 36.98-2.837 37.35-0.566 0.5647-33.21 5.578-34.81 5.347-0.275-0.04-22.78-3.644-50-8.009z" />
           <path onMouseEnter={() => handleHover('K')} onMouseLeave={() => handleExit('K')} data-outline="K" data-annotation="tripod" fill="rgba(0, 0, 0, 0.01)" d="m2344 1758-20-11.48-26.53-92.26c-14.59-50.74-26.8-92.95-27.14-93.79-0.3303-0.8429-12.01-6.884-25.97-13.43-13.95-6.541-25.89-12.38-26.54-12.97-2.366-2.159-3.258-36.83-3.799-147.6-0.3021-61.88-0.7874-119.2-1.078-127.5l-0.5293-15 79.31-82.99 38.05-7.758c20.93-4.267 38.22-7.587 38.43-7.379 0.2082 0.2083 43.07 112.8 95.26 250.3 52.18 137.4 95.16 250.6 95.51 251.5 0.505 1.28-19.35 14.05-95.63 61.5-52.95 32.94-96.96 59.99-97.81 60.13-0.8474 0.1321-10.54-4.926-21.54-11.24z" />
-          <path onMouseEnter={() => handleHover('L')} onMouseLeave={() => handleExit('L')} data-outline="L" data-annotation="suck a dick bitch!" fill="rgba(0, 0, 0, 0.01)" d="m2226 1937c-23.85-5.944-43.67-11.3-44.05-11.91-0.3761-0.6085-4.661-17.8-9.522-38.2l-8.838-37.09 3.462-3.68c1.904-2.024 10.81-11.71 19.79-21.52 15.73-17.19 16.44-17.82 19.42-17.19 1.703 0.3622 4.544 0.9112 6.315 1.22 2.362 0.4119 15.27 10.66 48.5 38.53 24.9 20.88 46.15 38.81 47.22 39.84 1.906 1.837 1.63 2.326-17.75 31.4-10.83 16.24-20.02 29.51-20.44 29.47-0.4115-0.037-20.26-4.93-44.11-10.87z" />
+          <path onMouseEnter={() => handleHover('L')} onMouseLeave={() => handleExit('L')} data-outline="L" data-annotation="eyeshadow palette 1" fill="rgba(0, 0, 0, 0.01)" d="m2226 1937c-23.85-5.944-43.67-11.3-44.05-11.91-0.3761-0.6085-4.661-17.8-9.522-38.2l-8.838-37.09 3.462-3.68c1.904-2.024 10.81-11.71 19.79-21.52 15.73-17.19 16.44-17.82 19.42-17.19 1.703 0.3622 4.544 0.9112 6.315 1.22 2.362 0.4119 15.27 10.66 48.5 38.53 24.9 20.88 46.15 38.81 47.22 39.84 1.906 1.837 1.63 2.326-17.75 31.4-10.83 16.24-20.02 29.51-20.44 29.47-0.4115-0.037-20.26-4.93-44.11-10.87z" />
           <path onMouseEnter={() => handleHover('M')} onMouseLeave={() => handleExit('M')} data-outline="M" data-annotation="..." fill="rgba(0, 0, 0, 0.01)" d="m2535 1961c-0.218-0.6298-2.673-17.48-5.455-37.43-4.72-33.86-5-36.99-4.181-46.77 0.4828-5.763 1.125-10.73 1.428-11.03 0.7407-0.7407 70.98-6.511 71.61-5.883 0.272 0.272 3.715 23.03 7.65 50.58 4.79 33.53 6.797 50.19 6.07 50.41-0.5971 0.1805-18.11 0.5407-38.91 0.8005-27.88 0.3482-37.93 0.1714-38.22-0.6726z" />
-          <path onMouseEnter={() => handleHover('N')} onMouseLeave={() => handleExit('N')} data-outline="N" data-annotation="bottle of genie" fill="rgba(0, 0, 0, 0.01)" d="m2742 2059-9.658-28.35 17.92-54.32h38.57l18.5 61-16.96 49.5-38.73 0.5268z" />
+          <path onMouseEnter={() => handleHover('N')} onMouseLeave={() => handleExit('N')} data-outline="N" data-annotation="fragrance bottle" fill="rgba(0, 0, 0, 0.01)" d="m2742 2059-9.658-28.35 17.92-54.32h38.57l18.5 61-16.96 49.5-38.73 0.5268z" />
         </g>
         <g id="info-boxes">
           <path
-            d="M3100 1275 L3100 1200 L3500 1200"
+            d=""
             stroke="#fff"
             strokeWidth="5"
             fill="none"
             className='pointer-line'
-            id='F-pointer-line'
+            filter="url(#soft-glow)"
           />
-          {/* <rect className='info-box' x="3081" y="1370" width="100" height="100" rx="15" fill="#fff" />
-          <text id="F-info" className='info-text' x="3081" y="1370" fill="#000">Lisa Eldridge</text> */}
+          {/* Mirror */}
+          <rect className="info-box" id="D-box" x="3500" y="400" width="400" height="200" rx="10" fill="rgba(0, 0, 0, 0.5)" />
         </g>
       </svg>
     </div>
