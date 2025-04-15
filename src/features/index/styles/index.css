@@ -75,29 +75,6 @@
   transition: opacity 0.3s;
 }
 
-.info-box {
-  z-index: 5;
-  color: #000;
-}
-
-.text-content {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-}
-
-#mirror-info {
-  position: absolute;
-  top: 40%;
-  right: 22%;
-  z-index: 1;
-  color: #fff;
-  font-size: 1.5rem;
-}
-
 .pointer-line {
   /* display: none; */
   stroke-dasharray: 1450;
@@ -105,20 +82,21 @@
   animation: draw-appear 1s ease-out forwards;
 }
 
-.info-box {
+.info-circle {
+  /* display: none; */
   display: block;
-  visibility: none;
   opacity: 0;
-  transition: opacity 2s ease-in-out forwards;
-
-  &:hover {
-    cursor: pointer;
-  }
+  transition: opacity 0.3s ease-in;
+  /* stroke-dasharray: 1450;
+  stroke-dashoffset: 1450;
+  animation: draw-appear 1s ease-out forwards; */
 }
 
-/* .pointer-line-exit {
-  animation: draw-exit 1s ease-out backwards;
-} */
+.circle-text, .link-text {
+  display: block;
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+}
 
 @keyframes draw-appear {
   to {

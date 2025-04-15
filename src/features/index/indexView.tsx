@@ -4,6 +4,7 @@ import wide from '../../assets/MORPH_COVER.jpg';
 import overhead from '../../assets/OVERHEAD.png';
 import entrance from '../../assets/ENTRANCE.png';
 import './styles/index.css'
+import { circle } from 'framer-motion/client';
 
 const IndexView = () => {
   const [closeView, setCloseView] = useState(false);
@@ -45,52 +46,67 @@ const IndexView = () => {
   }
 
   const handleHover = (id: string) => {
-    const pathVals = {
-      'D' : 'm3140 825 L3140 650 L3500 500',
-      'F' : 'm3100 1275 L3100 1200 L3500 1200',
-      'G' : 'm3060 1431 L2900 1575 L2775 1575',
-      'H' : 'm3115 1498 L3115 1675 L3275 1900',
-      'J' : 'm3265 1544 L3265 1700 L3700 1700',
-      'K' : 'm2275 1200 L2100 1200 L2100 1000',
-      'L' : 'm2240 1950 L2240 2150 L2000 2300',
-      'N' : 'm2772 1965 L2772 1900 L3500 1900',
-    }
+    const itemVals = {
+      'D': { pointer: 'm3140 825 L3140 650 L3422 500', circleX: '3630', circleY: '430', textX: '3630', textY: '430', textVal: 'Makeup Influencer', linkX: '3630', linkY: '490' },
+      'F': { pointer: 'm3100 1275 L3100 1200 L3500 1200', circleX: '3710', circleY: '1200', textX: '3710', textY: '1200', textVal: 'Makeup Artist', linkX: '3710', linkY: '1260' },
+      'G': { pointer: 'm3060 1431 L2900 1575 L2775 1575', circleX: '2555', circleY: '1575', textX: '', textY: '', textVal: '', linX: '', linkY: '' },
+      'H': { pointer: 'm3115 1498 L3115 1675 L3275 1900', circleX: '3400', circleY: '2075', textX: '', textY: '', textVal: '', linX: '', linkY: '' },
+      'J': { pointer: 'm3265 1544 L3265 1700 L3700 1700', circleX: '3920', circleY: '1700', textX: '', textY: '', textVal: '', linX: '', linkY: '' },
+      'K': { pointer: 'm2275 1200 L2100 1200 L2100 1000', circleX: '2100', circleY: '800', textX: '', textY: '', textVal: '', linX: '', linkY: '' },
+      'L': { pointer: 'm2240 1950 L2240 2100 L2100 2300', circleX: '1950', circleY: '2450', textX: '', textY: '', textVal: '', linX: '', linkY: '' },
+      'N': { pointer: 'm2772 1965 L2772 1900 L3340 1900', circleX: '3550', circleY: '1900', textX: '', textY: '', textVal: '', linX: '', linkY: '' },
+    };
 
     const pointerLine = document.querySelector('.pointer-line');
+    const infoCircle = document.querySelector('.info-circle');
+    const circleText = document.querySelector('.circle-text');
+    const linkText = document.querySelector('.link-text');
     const fillPath = document.getElementById(`${id}-fill`);
-    const infoBox = document.getElementById(`${id}-box`);
     const bgImage = document.getElementById('svg-bg-image');
 
-    if (fillPath && pointerLine && bgImage) {
+    if (fillPath && pointerLine && bgImage && infoCircle) {
       fillPath.style.stroke = 'rgba(239, 250, 255, 1)';
       fillPath.style.strokeWidth = '5px';
       fillPath.style.fill = 'rgba(239, 250, 255, 0.25)';
       fillPath.classList.add('glow');
 
-      pointerLine.setAttribute('d', pathVals[id]);
+      pointerLine.setAttribute('d', itemVals[id].pointer);
       pointerLine.style.display = 'block';
+      infoCircle.setAttribute('cx', itemVals[id].circleX);
+      infoCircle.setAttribute('cy', itemVals[id].circleY);
+      infoCircle.style.opacity = '1';
+
+      circleText.setAttribute('x', itemVals[id].textX);
+      circleText.setAttribute('y', itemVals[id].textY);
+      circleText.textContent = itemVals[id].textVal;
+      circleText.style.opacity = '1';
+
+      linkText.setAttribute('x', itemVals[id].linkX);
+      linkText.setAttribute('y', itemVals[id].linkY);
+      linkText.style.opacity = '1';
+
       bgImage.style.filter = 'brightness(85%)';
-      infoBox.style.visibility = 'visible';
-      infoBox.style.opacity = '1';
     }
   }
 
   const handleExit = (id: string) => {
     const fillPath = document.getElementById(`${id}-fill`);
     const pointerLine = document.querySelector('.pointer-line');
-    // const infoBox = document.getElementById(`${id}-box`);
+    const infoCircle = document.querySelector('.info-circle');
     const bgImage = document.getElementById('svg-bg-image');
+    const circleText = document.querySelector('.circle-text');
+    const linkText = document.querySelector('.link-text');
 
-    if (fillPath && pointerLine && bgImage) {
+    if (fillPath && pointerLine && bgImage && infoCircle) {
       fillPath.style.stroke = 'none';
       fillPath.style.strokeWidth = '0';
       fillPath.style.fill = 'rgba(0, 0, 0, 0.01)';
 
       pointerLine.setAttribute('d', '');
       pointerLine.style.display = 'none';
-      // infoBox.style.visibility = 'none';
-      // infoBox.style.opacity = '0';
-
+      infoCircle.style.opacity = '0';
+      circleText.style.opacity = '0';
+      linkText.style.opacity = '0';
       bgImage.style.filter = 'brightness(100%)';
     }
   }
@@ -107,6 +123,15 @@ const IndexView = () => {
             <feComposite in2="blurred" operator="in" />
             <feComposite in2="SourceAlpha" operator="in" />
             <feComposite in2="colored" operator="over" />
+          </filter>
+          <filter id="circle-glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blurred" />
+            <feFlood flood-color="rgba(204, 236, 250, 1)" flood-opacity="0.6" result="colored" />
+            <feComposite in="colored" in2="blurred" operator="in" result="softGlow_coloredBlur" />
+            <feMerge>
+              <feMergeNode in="softGlow_coloredBlur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
           </filter>
         </defs>
         <g id="svg-bg-image">
@@ -153,8 +178,38 @@ const IndexView = () => {
             className='pointer-line'
             filter="url(#soft-glow)"
           />
-          {/* Mirror */}
-          <rect className="info-box" id="D-box" x="3500" y="400" width="400" height="200" rx="10" fill="rgba(0, 0, 0, 0.5)" />
+          <circle
+            className='info-circle'
+            cx=""
+            cy=""
+            r="220"
+            fill="rgba(239, 250, 255, 0.75)"
+            filter="url(#circle-glow)"
+          />
+          <text
+            className='circle-text'
+            x=""
+            y=""
+            textAnchor="middle"
+            dominantBaseline="middle"
+            fontSize="52"
+            fill="black"
+            fontWeight="300"
+          >
+          </text>
+          <text
+            className='link-text'
+            x=""
+            y=""
+            textAnchor="middle"
+            dominantBaseline="middle"
+            fontSize="40"
+            fontStyle="italic"
+            fill="black"
+            fontWeight="300"
+          >
+            See More
+          </text>
         </g>
       </svg>
     </div>

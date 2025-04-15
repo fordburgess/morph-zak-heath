@@ -198,8 +198,8 @@ const LisaEldridgeView = () => {
         }
         else if (i == index) {
           bubble.style.transition = 'top 2s cubic-bezier(0.25, 0.8, 0.25, 1), left 2s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.5s ease';
-          bubble.style.top = '5%';
-          bubble.style.left = '5%';
+          bubble.style.top = '0%';
+          bubble.style.left = '0%';
           // bubble.style.transform = 'translate(-50%, -50%)';
           bubble.classList.add('active');
           document.getElementById(`text-container-${index}`)?.classList.add('active-text-container');
@@ -244,6 +244,13 @@ const LisaEldridgeView = () => {
         <h1 className='article-title'>In Conversation With Lisa Eldridge:</h1>
         <h2 className='article-subtitle'>Becoming A World Class Makeup Artist</h2>
       </div>
+      {/* <svg className='svg-element' width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M 100, 50 A 50, 50 0 1, 1 99.9, 50"
+          strokeWidth="2"
+        />
+      </svg> */}
+
       {
         article.map((question: any, index: number) => {
 
