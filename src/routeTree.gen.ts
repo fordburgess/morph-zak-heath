@@ -11,12 +11,19 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as PodcastsImport } from './routes/podcasts'
 import { Route as LisaEldridgeImport } from './routes/lisaEldridge'
 import { Route as BeautyIconsImport } from './routes/beautyIcons'
 import { Route as AdamReedImport } from './routes/adamReed'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const PodcastsRoute = PodcastsImport.update({
+  id: '/podcasts',
+  path: '/podcasts',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const LisaEldridgeRoute = LisaEldridgeImport.update({
   id: '/lisaEldridge',
@@ -74,6 +81,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LisaEldridgeImport
       parentRoute: typeof rootRoute
     }
+    '/podcasts': {
+      id: '/podcasts'
+      path: '/podcasts'
+      fullPath: '/podcasts'
+      preLoaderRoute: typeof PodcastsImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -84,6 +98,7 @@ export interface FileRoutesByFullPath {
   '/adamReed': typeof AdamReedRoute
   '/beautyIcons': typeof BeautyIconsRoute
   '/lisaEldridge': typeof LisaEldridgeRoute
+  '/podcasts': typeof PodcastsRoute
 }
 
 export interface FileRoutesByTo {
@@ -91,6 +106,7 @@ export interface FileRoutesByTo {
   '/adamReed': typeof AdamReedRoute
   '/beautyIcons': typeof BeautyIconsRoute
   '/lisaEldridge': typeof LisaEldridgeRoute
+  '/podcasts': typeof PodcastsRoute
 }
 
 export interface FileRoutesById {
@@ -99,14 +115,21 @@ export interface FileRoutesById {
   '/adamReed': typeof AdamReedRoute
   '/beautyIcons': typeof BeautyIconsRoute
   '/lisaEldridge': typeof LisaEldridgeRoute
+  '/podcasts': typeof PodcastsRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/adamReed' | '/beautyIcons' | '/lisaEldridge'
+  fullPaths: '/' | '/adamReed' | '/beautyIcons' | '/lisaEldridge' | '/podcasts'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/adamReed' | '/beautyIcons' | '/lisaEldridge'
-  id: '__root__' | '/' | '/adamReed' | '/beautyIcons' | '/lisaEldridge'
+  to: '/' | '/adamReed' | '/beautyIcons' | '/lisaEldridge' | '/podcasts'
+  id:
+    | '__root__'
+    | '/'
+    | '/adamReed'
+    | '/beautyIcons'
+    | '/lisaEldridge'
+    | '/podcasts'
   fileRoutesById: FileRoutesById
 }
 
@@ -115,6 +138,7 @@ export interface RootRouteChildren {
   AdamReedRoute: typeof AdamReedRoute
   BeautyIconsRoute: typeof BeautyIconsRoute
   LisaEldridgeRoute: typeof LisaEldridgeRoute
+  PodcastsRoute: typeof PodcastsRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -122,6 +146,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdamReedRoute: AdamReedRoute,
   BeautyIconsRoute: BeautyIconsRoute,
   LisaEldridgeRoute: LisaEldridgeRoute,
+  PodcastsRoute: PodcastsRoute,
 }
 
 export const routeTree = rootRoute
@@ -137,7 +162,8 @@ export const routeTree = rootRoute
         "/",
         "/adamReed",
         "/beautyIcons",
-        "/lisaEldridge"
+        "/lisaEldridge",
+        "/podcasts"
       ]
     },
     "/": {
@@ -151,6 +177,9 @@ export const routeTree = rootRoute
     },
     "/lisaEldridge": {
       "filePath": "lisaEldridge.tsx"
+    },
+    "/podcasts": {
+      "filePath": "podcasts.tsx"
     }
   }
 }
