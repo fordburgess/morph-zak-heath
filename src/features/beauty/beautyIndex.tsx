@@ -12,10 +12,10 @@ const BeautyIndexView = () => {
   const containerRef = useRef(null);
 
 
-  gsap.to('.scroll-in-content', {
-    scrollTrigger: '.scroll-in-content', // start animation when ".box" enters the viewport
-    x: 500
-  });
+  // gsap.to('.scroll-in-content', {
+  //   scrollTrigger: '.scroll-in-content', // start animation when ".box" enters the viewport
+  //   x: 500
+  // });
 
   useEffect(() => {
 
@@ -31,7 +31,14 @@ const BeautyIndexView = () => {
         </div>
       </div>
       <div className='scroll-in-content'>
-        <p>Scroll In Content</p>
+        <div className='main-content'>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
       </div>
     </div>
   )

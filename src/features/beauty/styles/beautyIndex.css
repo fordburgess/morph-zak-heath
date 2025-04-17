@@ -56,24 +56,25 @@
 .scroll-in-content {
   position: absolute;
   top: 250vh;
-  width: 100%;
-  text-align: center;
+  width: 100vw;
   color: white;
   height: 100vh;
   font-size: 1.5rem;
-  background-color: rgba(255, 255, 255, 0.467);
-}
-
-.circle-content-container {
   display: flex;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  justify-content: center;
 }
 
-.circle-section {
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
-  background-color: red;
+.main-content {
+  /* width: 75%; */
+  display: grid;
+  grid-template-columns: fit-content(100px) fit-content(100px) fit-content(100px);
+  grid-template-rows: fit-content(100px) fit-content(100px) fit-content(100px);
+  gap: 30px;
+
+  div {
+    background-color: red;
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+  }
 }
