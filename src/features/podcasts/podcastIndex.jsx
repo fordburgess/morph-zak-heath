@@ -7,13 +7,10 @@ const PodcastIndexView = () => {
   };
 
   useEffect(() => {
-
     function addScroll() {
       window.addEventListener('scroll', logScrollPosition);
     }
-
     addScroll()
-
     return () => {
       window.removeEventListener('scroll', logScrollPosition);
     };
