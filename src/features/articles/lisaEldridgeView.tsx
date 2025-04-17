@@ -3,14 +3,19 @@ import { Noise } from 'noisejs';
 import './styles/articles.css';
 import './styles/lisaEldridge.css';
 import Image1 from '../../assets/lisa-eldridge-1.webp';
-import Image8 from '../../assets/lisa-eldridge-8.webp'
+import Image2 from '../../assets/lisa-eldridge-2.webp';
+import Image8 from '../../assets/lisa-eldridge-8.webp';
+import Image9 from '../../assets/lisa-eldridge-9.webp';
+import ArrowRight from '../../assets/right-arrow.png';
+import ArrowLeft from '../../assets/left-arrow.png';
+import { motion } from 'framer-motion';
 
 const LisaEldridgeView = () => {
   const windowWidth = 2000;
   const CANVAS_WIDTH = 2000;
-  const NOISE_AMOUNT = 1;
+  const NOISE_AMOUNT = 4;
   const NOISE_SPEED = 0.006;
-  const SCROLL_SPEED = 0.85;
+  const SCROLL_SPEED = 0.45;
   const noise = new Noise();
 
   const article = [
@@ -25,14 +30,15 @@ const LisaEldridgeView = () => {
       answer: 'Oh, my God, well, my mum was actually going to call me Nina. And then, last minute, she changed it to Lisa. At one point, I thought I would have preferred Nina—I like it better. Honestly, I don’t like Lisa.',
       x: CANVAS_WIDTH / 1,
       y: 220,
-      s: 0.9
+      s: 0.9,
     },
     {
       question: 'What were your first experiences with makeup?',
       answer: 'It started when I found my mum’s old makeup after we moved back to England from New Zealand. She had this box with little drawers, filled with 1960s makeup like Biba and Mary Quant that was really playful and colourful. Makeup from that era was designed for teenagers, so it had this childlike, crayon-like quality that I loved because of the objects and textures and for me, that was the turning point. I was also really inspired by the “vintageness”, because I knew it was old makeup and that was more interesting than modern makeup. I also used to draw on paper with it because it was more interesting than using regular crayons and art supplies. For my 13th birthday, I got a book on stage and theatrical makeup, and it blew my mind. The transformations, the way you could create light and shade, it was like art. I knew that’s what I wanted to do',
       x: CANVAS_WIDTH / 2,
       y: 275,
-      s: 0.8
+      s: 0.8,
+      image: Image2
     },
     {
       question: 'When you were 21, who did you look up to in the beauty industry?',
@@ -66,7 +72,8 @@ const LisaEldridgeView = () => {
       answer: 'It was with Mary, assisting at shows like Rifat Ozbek in London and Romeo Gigli in Paris. I remember rushing through makeup at my first big show, and Mary told me to slow down and take my time. I was like, oh my god, okay!',
       x: CANVAS_WIDTH / 6,
       y: 250,
-      s: 0.9
+      s: 0.9,
+      image: Image9
     },
     {
       question: 'What advice would you give your 21-year-old self?',
@@ -137,7 +144,7 @@ const LisaEldridgeView = () => {
       const newY = question.y - SCROLL_SPEED + 0.05;
 
       const newXWithNoise = newX + randomX * NOISE_AMOUNT;
-      const newYWithNoise = newY + randomY * 5;
+      const newYWithNoise = newY + randomY * NOISE_AMOUNT;
 
       const element = document.getElementById(`item-${index}`);
 
@@ -176,48 +183,47 @@ const LisaEldridgeView = () => {
         cancelAnimationFrame(animationRef.current);
       }
 
+      let contentOverlay = document.querySelector('.content-overlay');
+
+      if (contentOverlay) {
+        contentOverlay.style.visibility = 'visible';
+        contentOverlay.style.opacity = 1;
+      }
+
       const bubbles = document.querySelectorAll('.bubble');
       bubbles.forEach((bubble: HTMLDivElement, i: number) => {
 
-        if (i !== index) {
-          // const randomX = (Math.floor(Math.random() * (window.innerWidth * 2)) - window.innerWidth * 2);
-          // const randomY = (Math.floor(Math.random() * (window.innerHeight * 2)) - window.innerHeight);
-          const randomX = Math.random() < 0.5 ? -Math.abs(Math.random() * (2000 - 1000) + 1000) : Math.abs(Math.random() * (2000 - 1000) + 1000);
-          const randomY = Math.random() < 0.5 ? -Math.abs(Math.random() * (2000 - 1000) + 1000) : Math.abs(Math.random() * (2000 - 1000) + 1000);
+        const randomX = Math.random() < 0.5 ? -Math.abs(Math.random() * (2000 - 1000) + 1000) : Math.abs(Math.random() * (2000 - 1000) + 1000);
+        const randomY = Math.random() < 0.5 ? -Math.abs(Math.random() * (2000 - 1000) + 1000) : Math.abs(Math.random() * (2000 - 1000) + 1000);
 
-          bubble.style.transition = `
-            height 15s cubic-bezier(0.25, 0.8, 0.25, 1),
-            width 15s cubic-bezier(0.25, 0.8, 0.25, 1),
-            top 5s cubic-bezier(0.25, 0.8, 0.25, 1),
-            left 5s cubic-bezier(0.25, 0.8, 0.25, 1),
-            transform 0.5s ease
-          `
-
-          bubble.style.left = `${randomX}px`;
-          bubble.style.top = `${randomY}px`;
-        }
-        else if (i == index) {
-          bubble.style.transition = 'top 2s cubic-bezier(0.25, 0.8, 0.25, 1), left 2s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.5s ease';
-          bubble.style.top = '0%';
-          bubble.style.left = '0%';
-          // bubble.style.transform = 'translate(-50%, -50%)';
-          bubble.classList.add('active');
-          document.getElementById(`text-container-${index}`)?.classList.add('active-text-container');
-        }
+        bubble.style.transition = `
+          height 15s cubic-bezier(0.25, 0.8, 0.25, 1),
+          width 15s cubic-bezier(0.25, 0.8, 0.25, 1),
+          top 5s cubic-bezier(0.25, 0.8, 0.25, 1),
+          left 5s cubic-bezier(0.25, 0.8, 0.25, 1),
+          transform 0.5s ease
+        `
+        bubble.style.left = `${randomX}px`;
+        bubble.style.top = `${randomY}px`;
       })
+
+
     }
   }
 
-  useEffect(() => {
-    console.log(activeIndex)
-  }, [activeIndex])
-
   const handleContainerClick = () => {
-    console.log(`Active index: ${activeIndex}`)
     if (activeIndex !== null) {
       setActiveIndex(null);
 
       const bubbles = document.querySelectorAll('.bubble');
+      const contentOverlay = document.querySelector('.content-overlay');
+
+      if (contentOverlay) {
+        contentOverlay.style.opacity = 0;
+        setTimeout(() => {
+          contentOverlay.style.visibility = 'hidden';
+        }, 550);
+      }
 
       bubbles.forEach((bubble: HTMLDivElement, i: number) => {
         const pos = positionsRef.current[i];
@@ -244,13 +250,6 @@ const LisaEldridgeView = () => {
         <h1 className='article-title'>In Conversation With Lisa Eldridge:</h1>
         <h2 className='article-subtitle'>Becoming A World Class Makeup Artist</h2>
       </div>
-      {/* <svg className='svg-element' width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M 100, 50 A 50, 50 0 1, 1 99.9, 50"
-          strokeWidth="2"
-        />
-      </svg> */}
-
       {
         article.map((question: any, index: number) => {
 
@@ -265,22 +264,89 @@ const LisaEldridgeView = () => {
               }}
             >
               {
-                question.image && (
-                  <img src={question.image} />
-                )
-              }
-              {
-                question.question && (
+                question.question ? (
                   <div id={`text-container-${index}`}>
                     <h3>{question.question}</h3>
-                    <p>{question.answer}</p>
                   </div>
+                ) : (
+                  <img src={question.image} />
                 )
               }
             </div>
           )
         })
       }
+      <div className='content-overlay'>
+        <div className='content-modal' id='content-modal' style={{ display: activeIndex ? 'flex' : 'none' }}>
+          {
+            activeIndex && (
+              <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+                <div style={{ textAlign: 'left', width: '65%' }}>
+                  <motion.h1
+                    id='item-title'
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
+                  >
+                    {article[activeIndex].question}
+                  </motion.h1>
+                  <motion.p
+                    id='item-answer'
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4, duration: 0.5, ease: "easeOut" }}
+                  >
+                    {article[activeIndex].answer}
+                  </motion.p>
+                </div>
+                {
+                  article[activeIndex].image && (
+                    <motion.img
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4, duration: 0.5, ease: "easeOut" }}
+                      className='content-image'
+                      src={article[activeIndex].image}
+                      alt={`question-${activeIndex}-image`}
+                    />
+                  )
+                }
+
+              </div>
+            )
+          }
+          <div className='nav-container' key={`nav-container-${activeIndex}`}>
+            <motion.div
+              className='nav-section'
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 2, duration: 0.5, ease: "easeOut" }}
+            >
+              <svg width="35" height="35" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24 12H0M0 12L12 5M0 12L12 19" stroke="#fff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </motion.div>
+            <motion.p
+              className='nav-note'
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 4, duration: 0.5, ease: "easeOut" }}
+            >
+              Or click anywhere to go back
+            </motion.p>
+            <motion.div
+              className='nav-section'
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 2, duration: 0.5, ease: "easeOut" }}
+            >
+              <svg width="35" height="35" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 12H24M24 12L12 5M24 12L12 19" stroke="#fff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </motion.div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
