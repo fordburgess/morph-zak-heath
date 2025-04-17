@@ -20,7 +20,7 @@
   display: block;
   width: 100vw;
   position: relative;
-  height: 350vh;
+  height: 250vh;
   background-color: red;
 }
 
@@ -55,7 +55,7 @@
 
 .scroll-in-content {
   position: absolute;
-  top: 250vh;
+  top: 150vh;
   width: 100vw;
   color: white;
   height: 100vh;

@@ -11,14 +11,34 @@ gsap.registerPlugin(ScrollTrigger);
 const BeautyIndexView = () => {
   const containerRef = useRef(null);
 
-
-  // gsap.to('.scroll-in-content', {
-  //   scrollTrigger: '.scroll-in-content', // start animation when ".box" enters the viewport
-  //   x: 500
-  // });
-
   useEffect(() => {
+    gsap.to('.overhead-image', {
+      y: '40%', // Move the image upward as you scroll
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.beauty-content-container',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: true, // Scrubs the animation with the scroll
+      },
+    });
 
+    gsap.fromTo('.scroll-in-content', {
+        opacity: 0,
+        y: '100%', // Start below the screen
+      },
+      {
+        opacity: 1,
+        y: 0,
+        scrollTrigger: {
+          trigger: '.pinned-scroll-container',
+          start: 'top 10%',
+          end: 'bottom bottom',
+          scrub: true,
+        },
+        ease: 'sine.inOut'
+      }
+    );
   }, [])
 
 
