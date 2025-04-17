@@ -1,9 +1,9 @@
-.beauty-page-container {
+/* .beauty-page-container {
   width: 100vw;
-  height: auto;
+  height: 500vh;
   position: relative;
   font-family: 'Josefin Sans';
-}
+} */
 
 .wide-image {
   object-position: center;
@@ -20,6 +20,8 @@
   display: block;
   width: 100vw;
   position: relative;
+  height: 400vh;
+  background-color: red;
 }
 
 .overhead-image, .expanded-image {
@@ -35,14 +37,12 @@
 
 .pinned-scroll-container {
   height: 200vh;
-  position: relative;
+  position: sticky;
+  top: -100vh;
 }
 
 .expanded-image-container {
-  height: 200vh;
-  position: sticky;
-  top: 0;
-  overflow: hidden;
+  height: 100%;
 }
 
 .expanded-image {
@@ -55,11 +55,11 @@
 
 .scroll-in-content {
   position: absolute;
-  top: 100vh;
+  top: 300vh;
   width: 100%;
   text-align: center;
-  padding: 2rem;
   color: white;
+  height: 100vh;
   font-size: 1.5rem;
   background-color: rgba(255, 255, 255, 0.467);
 }
