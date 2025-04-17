@@ -20,7 +20,7 @@
   display: block;
   width: 100vw;
   position: relative;
-  height: 400vh;
+  height: 350vh;
   background-color: red;
 }
 
@@ -36,9 +36,9 @@
 }
 
 .pinned-scroll-container {
-  height: 200vh;
+  height: 150vh;
   position: sticky;
-  top: -100vh;
+  top: -50vh;
 }
 
 .expanded-image-container {
@@ -55,7 +55,7 @@
 
 .scroll-in-content {
   position: absolute;
-  top: 300vh;
+  top: 250vh;
   width: 100%;
   text-align: center;
   color: white;
