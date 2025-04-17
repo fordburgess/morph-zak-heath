@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as LisaEldridgeImport } from './routes/lisaEldridge'
+import { Route as BeautyIconsImport } from './routes/beautyIcons'
 import { Route as AdamReedImport } from './routes/adamReed'
 import { Route as IndexImport } from './routes/index'
 
@@ -20,6 +21,12 @@ import { Route as IndexImport } from './routes/index'
 const LisaEldridgeRoute = LisaEldridgeImport.update({
   id: '/lisaEldridge',
   path: '/lisaEldridge',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const BeautyIconsRoute = BeautyIconsImport.update({
+  id: '/beautyIcons',
+  path: '/beautyIcons',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -53,6 +60,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdamReedImport
       parentRoute: typeof rootRoute
     }
+    '/beautyIcons': {
+      id: '/beautyIcons'
+      path: '/beautyIcons'
+      fullPath: '/beautyIcons'
+      preLoaderRoute: typeof BeautyIconsImport
+      parentRoute: typeof rootRoute
+    }
     '/lisaEldridge': {
       id: '/lisaEldridge'
       path: '/lisaEldridge'
@@ -68,12 +82,14 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/adamReed': typeof AdamReedRoute
+  '/beautyIcons': typeof BeautyIconsRoute
   '/lisaEldridge': typeof LisaEldridgeRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/adamReed': typeof AdamReedRoute
+  '/beautyIcons': typeof BeautyIconsRoute
   '/lisaEldridge': typeof LisaEldridgeRoute
 }
 
@@ -81,27 +97,30 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/adamReed': typeof AdamReedRoute
+  '/beautyIcons': typeof BeautyIconsRoute
   '/lisaEldridge': typeof LisaEldridgeRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/adamReed' | '/lisaEldridge'
+  fullPaths: '/' | '/adamReed' | '/beautyIcons' | '/lisaEldridge'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/adamReed' | '/lisaEldridge'
-  id: '__root__' | '/' | '/adamReed' | '/lisaEldridge'
+  to: '/' | '/adamReed' | '/beautyIcons' | '/lisaEldridge'
+  id: '__root__' | '/' | '/adamReed' | '/beautyIcons' | '/lisaEldridge'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdamReedRoute: typeof AdamReedRoute
+  BeautyIconsRoute: typeof BeautyIconsRoute
   LisaEldridgeRoute: typeof LisaEldridgeRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdamReedRoute: AdamReedRoute,
+  BeautyIconsRoute: BeautyIconsRoute,
   LisaEldridgeRoute: LisaEldridgeRoute,
 }
 
@@ -117,6 +136,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/adamReed",
+        "/beautyIcons",
         "/lisaEldridge"
       ]
     },
@@ -125,6 +145,9 @@ export const routeTree = rootRoute
     },
     "/adamReed": {
       "filePath": "adamReed.tsx"
+    },
+    "/beautyIcons": {
+      "filePath": "beautyIcons.tsx"
     },
     "/lisaEldridge": {
       "filePath": "lisaEldridge.tsx"

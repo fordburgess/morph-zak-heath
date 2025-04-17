@@ -1,0 +1,53 @@
+.beauty-page-container {
+  height: 2000px;
+  width: 100vw;
+  position: relative;
+  font-family: 'Josefin Sans';
+}
+
+.wide-image {
+  object-position: center;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+}
+
+.beauty-content-container {
+  display: none;
+  width: 100vw;
+  position: relative;
+}
+
+.overhead-image, .expanded-image {
+  display: block;
+}
+
+.overhead-image {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center;
+}
+
+.expanded-image {
+  width: 100%;
+  height: auto;
+}
+
+.circle-content-container {
+  display: flex;
+}
+
+.circle-content {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  background-color: red;
+}

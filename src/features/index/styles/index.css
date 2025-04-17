@@ -4,10 +4,6 @@
   height: 100vh;
   width: 100vw;
   position: relative;
-  /* background-image: url('../../../assets/MORPH_COVER.jpg'); */
-  /* background-position: center; */
-  /* background-size: cover; */
-  /* transition: background-size 0.5s ease, background-position 0.5s ease; */
   overflow: hidden;
   font-family: 'Josefin Sans';
 }
