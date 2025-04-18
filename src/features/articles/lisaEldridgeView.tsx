@@ -294,12 +294,12 @@ const LisaEldridgeView = () => {
                     id='item-answer'
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4, duration: 0.5, ease: "easeOut" }}
+                    transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
                   >
                     {article[activeIndex].answer}
                   </motion.p>
                 </div>
-                {
+                {/* {
                   article[activeIndex].image && (
                     <motion.img
                       initial={{ opacity: 0, y: 30 }}
@@ -310,7 +310,7 @@ const LisaEldridgeView = () => {
                       alt={`question-${activeIndex}-image`}
                     />
                   )
-                }
+                } */}
 
               </div>
             )
