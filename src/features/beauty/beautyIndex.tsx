@@ -32,7 +32,7 @@ const BeautyIndexView = () => {
         y: 0,
         scrollTrigger: {
           trigger: '.pinned-scroll-container',
-          start: 'top 10%',
+          start: 'top 20%',
           end: 'bottom bottom',
           scrub: true,
         },
