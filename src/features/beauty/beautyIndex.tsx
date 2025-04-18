@@ -46,9 +46,7 @@ const BeautyIndexView = () => {
     <div className='beauty-content-container'>
       <img src={FieldAbove} className='overhead-image' />
       <div ref={containerRef} className='pinned-scroll-container'>
-        <div className='expanded-image-container'>
-          <img src={FieldExpandedTest} className='expanded-image' />
-        </div>
+        <img src={FieldExpandedTest} className='expanded-image' />
       </div>
       <div className='scroll-in-content'>
         <div className='main-content'>
