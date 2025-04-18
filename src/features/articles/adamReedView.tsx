@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from "react";
 import Matter from "matter-js";
 import MatterWrap from "matter-wrap"; // Make sure this is installed
 import "./styles/adamReed.css"; // Optional CSS
+import Adam2 from '../../assets/adam-reed-2.jpeg';
+import Adam1 from '../../assets/adam-reed.webp';
 
 const questions = [
   {
@@ -9,9 +11,42 @@ const questions = [
     answer: "Kestrel, like the bird. When I was young, I loved the film Kes, and I’ve always admired the power behind that name. Funny enough, when we adopted Riley (my husband and I’s son), before realising you couldn’t change their names, we almost called him Kestrel because of that connection."
   },
   {
-    question: 'When you were 21, who did you look up to in the beauty industry?',
+    question: "When you were 21, who did you look up to in the beauty industry?",
     answer: "Julien d’Ys, the French hairdresser. He has always been my ultimate icon. And Estée Lauder, I was obsessed with her brand. My grandmother used Estée Lauder and the heritage of the brand and what they did back then captivated me because it was’t as consumer facing. I also admired François Nars. Meeting Julien d’Ys was surreal; I completely fan-girled and went quiet, which isn’t like me at all! I stood quite in awe of the fact I got to meet him, and as it was early on in my career, I just thought he was amazing!"
+  },
+  {
+    question: "What was your first interaction with hair?",
+    answer: "It started with my Nan. As a boy, I’d go with her to this tiny salon in a tiny village in Somerset called Jenny’s Cut & Shape. It was full of old ladies getting shampoos and cut and I felt at home, me in a salon I did. I used to cut my sister’s and best friends hair from a young age and I guess that is why I have always worked in a salon and not been just a session stylist because I love that sense of community. I was only four, but they had me cleaning rollers, sweeping the floor, and making coffee. That salon gave me a sense of belonging that school never did, because I felt like I wasn’t very good at school, but in a salon I thrived, and I loved it."
+  },
+  {
+    question: "Where did you go clubbing in London at 21?",
+    answer: "I went to Heaven, Velvet Underground, and a bar in Soho called Ricky Ticks, a hub for fashion people. Moving to London at 22, I immersed myself in these places to network and meet people, so I went three to four times a week, I loved it and I felt like I was with my people. I even met Jean Paul Gaultier at Heaven! I was wearing a Jean Paul Gaultier kilt, and so was he. I walked right up to him. Networking then was all face-to-face, and I loved it, so I made sure I was in the right places to meet the right people and you’d meet the most amazing people in Heaven."
+  },
+  {
+    question: "How did you approach networking when you didn’t know anyone?",
+    answer: "I’d go up to people, compliment their work, and start conversations. My strategy was also to meet PRs face-to-face who could get me into events and who looked after these big names. The party scene was much bigger back then because social media wasn’t around to let people know what was happening, it was more exclusive, so having the PR’s numbers was a better way. Once there, my motto was kill people with kindness, so I avoided being obnoxious and focused on being helpful and approachable because that is what stood out."
+  },
+  {
+    question: "Did you face any setbacks in the industry?",
+    answer: "Yes. I now understand that some of my struggles were tied to neurodiversity. I’ve always been sensitive to negativity and could feel overwhelmed in certain situations. Another challenge was proving that I wasn’t just a salon hairdresser and that I could do creative work and could manage a team behind the scenes at Fashion Week, and I had to battle with this. I persevered and assisted Luigi Murenu, an Italian hairstylist early on in my career, which helped me break through those barriers by supporting everything I wanted to do. They were amazing.",
+  },
+  {
+    question: "What was your very first show?",
+    answer: "It was for Red or Dead in 1996. They were a revolutionary streetwear brand who had a shop in Covent Garden, and I was obsessed with their clothes. It felt like a full-circle moment that they were my first London Fashion Week show since I loved their clothes and this made me massively believe in manifestation and putting things into the universe . From there, I worked with other amazing designers, including Andrew Groves, who was McQueen’s boyfriend at the time and whose shows really pushed boundaries - for example, one of his shows was called Cociane Nights and down the runway was a line of “coke”. I then started doing Julian McDonald, Matthew Williamson and then both the commercial and high-end fashion. I was really lucky that my trajectory took me to do all of that."
+  },
+  {
+    question: "Did you attend beauty school?",
+    answer: "Yes, I worked in a salon and attended beauty school once a week to get my City & Guilds qualification and the school was called SCAT, Somerset College of Arts. Then it was very in- depth, we even learned how to make shampoo and perm solutions from scratch. When I moved to London at the age of twenty-two, I started at Charles Worthington."
+  },
+  {
+    question: "What’s your favourite fragrance?",
+    answer: "Bloody hell, outside of my own line, I would say Diptyque’s 34."
   }
+]
+
+const images = [
+  { src: Adam1, radius: 100 },
+  { src: Adam2, radius: 120 }
 ]
 
 const AdamReedView = () => {
@@ -82,7 +117,35 @@ const AdamReedView = () => {
     Matter.Events.on(render, 'afterRender', () => {
       const context = render.context;
 
-      context.font = '18px Josefin Sans';
+      Composite.allBodies(engine.world).forEach(body => {
+        if (body.circleRadius && body.render.sprite?.texture) {
+          const img = new Image();
+          img.src = body.render.sprite.texture;
+
+          const radius = body.circleRadius;
+          const x = body.position.x;
+          const y = body.position.y;
+
+          context.save();
+          context.beginPath();
+          context.arc(x, y, radius, 0, 2 * Math.PI);
+          context.closePath();
+          context.clip();
+          const imgSize = Math.min(img.width, img.height); // smallest side for cropping square
+          const sx = (img.width - imgSize) / 2;
+          const sy = (img.height - imgSize) / 2;
+
+          context.drawImage(
+            img,
+            sx, sy, imgSize, imgSize,       // crop: center square
+            x - radius, y - radius,         // draw position
+            radius * 2, radius * 2          // draw size (circle bounds)
+          );
+          context.restore();
+        }
+      })
+
+      // context.font = '15px Josefin Sans';
       context.fillStyle = '#000'; // White text
 
       Composite.allBodies(engine.world).forEach(body => {
@@ -95,10 +158,10 @@ const AdamReedView = () => {
 
             if (body.plugin.fullTextVisible) {
               text = body.plugin.fullText;
-              context.font = '16px Josefin Sans';
+              context.font = '500 Josefin Sans';
             }
           } else {
-            context.font = '18px Josefin Sans';
+            context.font = '300 18px Josefin Sans';
           }
 
           const maxTextWidth = body.circleRadius * 1.6; // scale with size
@@ -158,10 +221,23 @@ const AdamReedView = () => {
     //   })
     // );
 
-    const getTextBasedRadius = (text) => {
-      const length = text.length;
+    const getTextHeight = (context, text, maxWidth, lineHeight) => {
+      const lines = wrapText(context, text, maxWidth); // Use wrapText to calculate number of lines
+      return lines.length * lineHeight; // Total height = number of lines * line height
+    };
+
+    const getTextBasedRadius = (context, question, answer) => {
+      const maxWidth = 300; // You can adjust this to fit your design
+
+      const questionHeight = getTextHeight(context, question, maxWidth, 20); // line height of 20
+      // const answerHeight = getTextHeight(context, answer, maxWidth, 20);
+
+      // Calculate the required radius based on the larger of the question or answer height
+      const heightRequired = Math.max(questionHeight);
+
+      // Base radius is 80, then add some extra size based on the height of the text
       const baseSize = 80;
-      const extra = Math.min(length * 0.5, 100); // max growth
+      const extra = Math.min(heightRequired * 0.5, 150); // max growth
       return baseSize + extra;
     };
 
@@ -170,7 +246,7 @@ const AdamReedView = () => {
       Bodies.circle(
         Common.random(100, 200),
         Common.random(100, 200),
-        getTextBasedRadius(item.question),
+        getTextBasedRadius(render.context, item.question, item.answer),
         {
           restitution: 0.6,
           friction: 0.1,
@@ -191,7 +267,28 @@ const AdamReedView = () => {
       )
     );
 
+    const imageBodies = images.map((img) =>
+      Bodies.circle(
+        Common.random(100, 200),
+        Common.random(100, 200),
+        img.radius,
+        {
+          isStatic: false,
+          restitution: 0.6,
+          friction: 0.1,
+          render: {
+            sprite: {
+              texture: img.src,
+              xScale: 0, // assuming image width is ~100px
+              yScale: 0,
+            },
+          },
+        }
+      )
+    );
+
     Composite.add(world, circles);
+    Composite.add(world, imageBodies);
 
     // Mouse control
     const mouse = Mouse.create(render.canvas);
@@ -221,14 +318,36 @@ const AdamReedView = () => {
 
         const currentScale = clickedBubble.plugin.scaleFactor || 1;
         const targetScale = currentScale === 1 ? 2 : 1; // toggle
-        expandingBubbles.current.set(clickedBubble.id, {
-          body: clickedBubble,
-          target: targetScale,
-          speed: 0.1, // how fast to interpolate
-        });
+
+        if (clickedBubble.plugin.scaleFactor === 1) {
+          // Start fade out of question
+          clickedBubble.plugin.questionFadingOut = true;
+
+          // Delay bubble expansion until question is fully faded
+          setTimeout(() => {
+            expandingBubbles.current.set(clickedBubble.id, {
+              body: clickedBubble,
+              target: 2,
+              speed: 0.1,
+            });
+            clickedBubble.plugin.willShowFullText = true;
+            clickedBubble.plugin.showFullTextAt = Date.now() + 500;
+          }, 100); // match this to fade speed
+        } else {
+          // Shrinking: fade in question, shrink bubble
+            clickedBubble.plugin.answerFadingOut = true;
+
+            // Delay shrinking until answer is fully faded
+            setTimeout(() => {
+              expandingBubbles.current.set(clickedBubble.id, {
+                body: clickedBubble,
+                target: 1,
+                speed: 0.1,
+              });
+            }, 100); // Match this to fade speed
+        }
 
         clickedBubble.plugin.showFullTextAt = null;
-
         if (targetScale === 2) {
           // Only set this if expanding
           clickedBubble.plugin.willShowFullText = true;
@@ -262,30 +381,42 @@ const AdamReedView = () => {
           y: (Math.random() - 0.5) * jitter,
         });
 
+        const fadeSpeed = 1 / 8;
+        if (body.plugin?.questionFadingOut) {
+          body.plugin.questionOpacity = Math.max(0, (body.plugin.questionOpacity ?? 1) - fadeSpeed);
+          if (body.plugin.questionOpacity <= 0) {
+            body.plugin.questionFadingOut = false; // done fading
+          }
+        }
+
+        if (body.plugin?.answerFadingOut) {
+          body.plugin.answerOpacity = Math.max(0, (body.plugin.answerOpacity ?? 1) - fadeSpeed);
+          if (body.plugin.answerOpacity <= 0) {
+            body.plugin.answerFadingOut = false; // Done fading
+            body.plugin.fullTextVisible = false;
+          }
+        }
+
         // -- smooth scale animation --
         const expandData = expandingBubbles.current.get(body.id);
         if (expandData) {
           const { target, speed } = expandData;
           const current = body.plugin.scaleFactor || 1;
 
-          if (!body.plugin.textOpacity) {
-            body.plugin.textOpacity = 1;
-          }
-
-          const fadeSpeed = 1 / 10;
           if (target === 2) {
-            body.plugin.questionOpacity = Math.max(0, (body.plugin.questionOpacity ?? 1) - fadeSpeed);
+            // fade in answer
             const willBeVisible = body.plugin.showFullTextAt && Date.now() >= body.plugin.showFullTextAt;
-
-            // Start fading in answer right before it becomes fully "visible"
             if (willBeVisible || body.plugin.fullTextVisible) {
               body.plugin.answerOpacity = Math.min(1, (body.plugin.answerOpacity ?? 0) + fadeSpeed);
             }
           } else {
             // Collapsing: fade in question, fade out answer
-            body.plugin.questionOpacity = Math.min(1, (body.plugin.questionOpacity ?? 0) + fadeSpeed);
+            setTimeout(() => {
+              body.plugin.questionOpacity = Math.min(1, (body.plugin.questionOpacity ?? 0) + fadeSpeed);
+            }, 550);
             body.plugin.answerOpacity = Math.max(0, (body.plugin.answerOpacity ?? 1) - fadeSpeed);
           }
+
 
           // Only scale if not at target
           if (Math.abs(current - target) > 0.01) {
