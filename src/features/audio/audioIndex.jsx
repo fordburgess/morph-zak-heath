@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const PodcastIndexView = () => {
+const AudioIndexView = () => {
 
 //   const logScrollPosition = () => {
 //     console.log('Scroll position:', window.scrollY);
@@ -33,4 +33,4 @@ const PodcastIndexView = () => {
   )
 }
 
-export default PodcastIndexView;
+export default AudioIndexView;
