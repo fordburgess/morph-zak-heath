@@ -14,8 +14,8 @@ body::before {
   top: 0; left: 0;
   width: 100%;
   height: 100%;
-  background: url('../../../assets/ENTRACE-EXPANDED.webp') center / cover no-repeat;
-  filter: brightness(88%);
+  background: url('../../../assets/spring-expanded.jpg') center / cover no-repeat;
+  filter: brightness(88%) blur(3px);
   z-index: -1;
 }
 
@@ -37,6 +37,7 @@ body::before {
 .lisa-eldridge-header {
   padding: 50px;
   text-align: left;
+  transition: opacity 0.2s;
 }
 
 .bubble {
@@ -44,8 +45,6 @@ body::before {
   border-radius: 500px;
   height: 250px;
   width: 250px;
-  background:
-  linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(245, 245, 245, 0.9)) border-box;
   color: #000;
   z-index: 5;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;

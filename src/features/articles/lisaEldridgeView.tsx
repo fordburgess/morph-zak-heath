@@ -18,6 +18,8 @@ const LisaEldridgeView = () => {
   const SCROLL_SPEED = 0.45;
   const noise = new Noise();
 
+  const colors = ['rgba(248, 215, 218, 0.8)', 'rgba(221, 235, 225, 0.8)', 'rgba(253, 246, 237, 0.8)'];
+
   const article = [
     {
       image: Image1,
@@ -84,7 +86,7 @@ const LisaEldridgeView = () => {
     }
   ]
 
-  const interval = CANVAS_WIDTH / article.length + 50;
+  const interval = CANVAS_WIDTH / article.length + 100;
   const articleRef = useRef(
     article.map((question, i) => {
 
@@ -153,10 +155,6 @@ const LisaEldridgeView = () => {
           positionsRef.current[index] = { newXWithNoise, newYWithNoise };
         }
 
-        if (index == 0) {
-          console.log(newXWithNoise)
-        }
-
         if (newXWithNoise < -450) {
           element.style.opacity = '0';
         }
@@ -168,10 +166,6 @@ const LisaEldridgeView = () => {
         element.style.left = `${newXWithNoise}px`;
         element.style.top = `${newYWithNoise}px`;
         element.style.transform = `scale(${question.s})`;
-
-        if (index == 0) {
-          console.log({newXWithNoise, opacity: element.style.opacity})
-        }
       }
 
       return {
@@ -192,35 +186,39 @@ const LisaEldridgeView = () => {
 
   const handleClick = (index: number) => {
     if (activeIndex == null) {
-
       setActiveIndex(index);
 
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
 
-      let contentOverlay = document.querySelector('.content-overlay');
+      // let contentOverlay = document.querySelector('.content-overlay');
 
-      if (contentOverlay) {
-        contentOverlay.style.visibility = 'visible';
-        contentOverlay.style.opacity = 1;
-      }
+      // if (contentOverlay) {
+      //   contentOverlay.style.visibility = 'visible';
+      //   contentOverlay.style.opacity = 1;
+      // }
 
       const bubbles = document.querySelectorAll('.bubble');
       bubbles.forEach((bubble: HTMLDivElement, i: number) => {
 
-        const randomX = Math.random() < 0.5 ? -Math.abs(Math.random() * (2000 - 1000) + 1000) : Math.abs(Math.random() * (2000 - 1000) + 1000);
-        const randomY = Math.random() < 0.5 ? -Math.abs(Math.random() * (2000 - 1000) + 1000) : Math.abs(Math.random() * (2000 - 1000) + 1000);
+        if (i == index) {
+          // document.getElementById(`item-s`)
+        }
+        else {
+          const randomX = Math.random() < 0.5 ? -Math.abs(Math.random() * (2000 - 1000) + 1000) : Math.abs(Math.random() * (2000 - 1000) + 1000);
+          const randomY = Math.random() < 0.5 ? -Math.abs(Math.random() * (2000 - 1000) + 1000) : Math.abs(Math.random() * (2000 - 1000) + 1000);
 
-        bubble.style.transition = `
-          height 15s cubic-bezier(0.25, 0.8, 0.25, 1),
-          width 15s cubic-bezier(0.25, 0.8, 0.25, 1),
-          top 5s cubic-bezier(0.25, 0.8, 0.25, 1),
-          left 5s cubic-bezier(0.25, 0.8, 0.25, 1),
-          transform 0.5s ease
-        `
-        bubble.style.left = `${randomX}px`;
-        bubble.style.top = `${randomY}px`;
+          bubble.style.transition = `
+            height 15s cubic-bezier(0.25, 0.8, 0.25, 1),
+            width 15s cubic-bezier(0.25, 0.8, 0.25, 1),
+            top 5s cubic-bezier(0.25, 0.8, 0.25, 1),
+            left 5s cubic-bezier(0.25, 0.8, 0.25, 1),
+            transform 0.5s ease
+          `
+          bubble.style.left = `${randomX}px`;
+          bubble.style.top = `${randomY}px`;
+        }
       })
 
 
@@ -262,7 +260,7 @@ const LisaEldridgeView = () => {
 
   return (
     <div className='article-container' onClick={() => handleContainerClick()}>
-      <div className='lisa-eldridge-header'>
+      <div className='lisa-eldridge-header' style={{ opacity: activeIndex ? 0 : 1 }}>
         <h1 className='article-title'>In Conversation With Lisa Eldridge:</h1>
         <h2 className='article-subtitle'>Becoming A World Class Makeup Artist</h2>
       </div>
@@ -276,7 +274,8 @@ const LisaEldridgeView = () => {
               onClick={() => handleClick(index)}
               style={{
                 padding: question.image ? '0' : '10px',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                backgroundColor: colors[Math.floor(Math.random() * colors.length)]
               }}
             >
               {
