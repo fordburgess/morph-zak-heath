@@ -283,7 +283,7 @@ const AdamReedView = () => {
 
     const circles = questions.map((item, i) =>
       Bodies.circle(
-        (i + 1) * 100,
+        (i + 1) * 100 + 500,
         item.y,
         getTextBasedRadius(render.context, item.question, item.answer),
         {

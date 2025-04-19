@@ -153,9 +153,25 @@ const LisaEldridgeView = () => {
           positionsRef.current[index] = { newXWithNoise, newYWithNoise };
         }
 
+        if (index == 0) {
+          console.log(newXWithNoise)
+        }
+
+        if (newXWithNoise < -450) {
+          element.style.opacity = '0';
+        }
+
+        if (newXWithNoise < 2500 && newXWithNoise > 2000) {
+          element.style.opacity = '1';
+        }
+
         element.style.left = `${newXWithNoise}px`;
         element.style.top = `${newYWithNoise}px`;
         element.style.transform = `scale(${question.s})`;
+
+        if (index == 0) {
+          console.log({newXWithNoise, opacity: element.style.opacity})
+        }
       }
 
       return {
@@ -234,9 +250,9 @@ const LisaEldridgeView = () => {
         bubble.style.top = `${pos.top}px`;
         bubble.classList.remove('active');
         document.getElementById(`text-container-${i}`)?.classList.remove('active-text-container');
-        setTimeout(() => {
-          bubble.style.transition = '';
-        }, 4000);
+        // setTimeout(() => {
+        //   bubble.style.transition = '';
+        // }, 4000);
       });
 
       animationRef.current = requestAnimationFrame(animate); // Resume animation if needed
