@@ -87,7 +87,7 @@ const ServicesView = () => {
       ease: 'none',
       scrollTrigger: {
         trigger: ".page-container",
-        start: "60% top",
+        start: "55% top",
         end: "bottom top",
         scrub: true
       }
