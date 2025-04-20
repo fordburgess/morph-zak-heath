@@ -14,7 +14,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as ServicesImport } from './routes/services'
 import { Route as LisaEldridgeImport } from './routes/lisaEldridge'
 import { Route as FeaturedImport } from './routes/featured'
-import { Route as BeautyIconsImport } from './routes/beautyIcons'
+import { Route as BeautyImport } from './routes/beauty'
 import { Route as AudioImport } from './routes/audio'
 import { Route as AdamReedImport } from './routes/adamReed'
 import { Route as IndexImport } from './routes/index'
@@ -39,9 +39,9 @@ const FeaturedRoute = FeaturedImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const BeautyIconsRoute = BeautyIconsImport.update({
-  id: '/beautyIcons',
-  path: '/beautyIcons',
+const BeautyRoute = BeautyImport.update({
+  id: '/beauty',
+  path: '/beauty',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -88,11 +88,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AudioImport
       parentRoute: typeof rootRoute
     }
-    '/beautyIcons': {
-      id: '/beautyIcons'
-      path: '/beautyIcons'
-      fullPath: '/beautyIcons'
-      preLoaderRoute: typeof BeautyIconsImport
+    '/beauty': {
+      id: '/beauty'
+      path: '/beauty'
+      fullPath: '/beauty'
+      preLoaderRoute: typeof BeautyImport
       parentRoute: typeof rootRoute
     }
     '/featured': {
@@ -125,7 +125,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/adamReed': typeof AdamReedRoute
   '/audio': typeof AudioRoute
-  '/beautyIcons': typeof BeautyIconsRoute
+  '/beauty': typeof BeautyRoute
   '/featured': typeof FeaturedRoute
   '/lisaEldridge': typeof LisaEldridgeRoute
   '/services': typeof ServicesRoute
@@ -135,7 +135,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/adamReed': typeof AdamReedRoute
   '/audio': typeof AudioRoute
-  '/beautyIcons': typeof BeautyIconsRoute
+  '/beauty': typeof BeautyRoute
   '/featured': typeof FeaturedRoute
   '/lisaEldridge': typeof LisaEldridgeRoute
   '/services': typeof ServicesRoute
@@ -146,7 +146,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/adamReed': typeof AdamReedRoute
   '/audio': typeof AudioRoute
-  '/beautyIcons': typeof BeautyIconsRoute
+  '/beauty': typeof BeautyRoute
   '/featured': typeof FeaturedRoute
   '/lisaEldridge': typeof LisaEldridgeRoute
   '/services': typeof ServicesRoute
@@ -158,7 +158,7 @@ export interface FileRouteTypes {
     | '/'
     | '/adamReed'
     | '/audio'
-    | '/beautyIcons'
+    | '/beauty'
     | '/featured'
     | '/lisaEldridge'
     | '/services'
@@ -167,7 +167,7 @@ export interface FileRouteTypes {
     | '/'
     | '/adamReed'
     | '/audio'
-    | '/beautyIcons'
+    | '/beauty'
     | '/featured'
     | '/lisaEldridge'
     | '/services'
@@ -176,7 +176,7 @@ export interface FileRouteTypes {
     | '/'
     | '/adamReed'
     | '/audio'
-    | '/beautyIcons'
+    | '/beauty'
     | '/featured'
     | '/lisaEldridge'
     | '/services'
@@ -187,7 +187,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdamReedRoute: typeof AdamReedRoute
   AudioRoute: typeof AudioRoute
-  BeautyIconsRoute: typeof BeautyIconsRoute
+  BeautyRoute: typeof BeautyRoute
   FeaturedRoute: typeof FeaturedRoute
   LisaEldridgeRoute: typeof LisaEldridgeRoute
   ServicesRoute: typeof ServicesRoute
@@ -197,7 +197,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdamReedRoute: AdamReedRoute,
   AudioRoute: AudioRoute,
-  BeautyIconsRoute: BeautyIconsRoute,
+  BeautyRoute: BeautyRoute,
   FeaturedRoute: FeaturedRoute,
   LisaEldridgeRoute: LisaEldridgeRoute,
   ServicesRoute: ServicesRoute,
@@ -216,7 +216,7 @@ export const routeTree = rootRoute
         "/",
         "/adamReed",
         "/audio",
-        "/beautyIcons",
+        "/beauty",
         "/featured",
         "/lisaEldridge",
         "/services"
@@ -231,8 +231,8 @@ export const routeTree = rootRoute
     "/audio": {
       "filePath": "audio.tsx"
     },
-    "/beautyIcons": {
-      "filePath": "beautyIcons.tsx"
+    "/beauty": {
+      "filePath": "beauty.tsx"
     },
     "/featured": {
       "filePath": "featured.tsx"
