@@ -82,6 +82,7 @@ h1, h2, h3, h4, h5, h6, p {
   position: absolute;
   text-align: center;
   transform-style: preserve-3d;
+  z-index: 10;
 }
 
 .title-container {
