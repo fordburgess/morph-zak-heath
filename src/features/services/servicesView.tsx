@@ -14,19 +14,22 @@ const ServicesView = () => {
     const initialImageContainer = document.querySelector('.initial-image-container');
     const initialImage = document.querySelector('.initial-image');
     const svgOverlayContainer = document.querySelector('.svg-overlay-container');
+    const title = document.getElementById('services-title');
+    const subtitle = document.getElementById('services-subtitle');
 
     if (direction == 0) {
-      svgOverlayContainer.style.transition = 'opacity 1.2s ease-in-out';
-      svgOverlayContainer.style.transition = 'transform 0.3s ease-in-out';
-      initialImageContainer.style.transition = 'opacity 0.5s ease-in-out';
       initialImageContainer.style.display = 'block';
+
+      svgOverlayContainer.style.transition = 'opacity 1.2s ease-in-out, transform 0.3s ease-in-out';
+      initialImageContainer.style.transition = 'opacity 0.75s ease-in-out';
+      initialImage.style.transition = 'transform 0.3s ease-in-out';
 
       // svgOverlayContainer.style.opacity = 0;
 
-      initialImage.style.transform = 'scale(1)';
-
       requestAnimationFrame(() => {
+        svgOverlayContainer.style.opacity = 0;
         initialImageContainer.style.opacity = 1;
+        initialImage.style.transform = 'scale(1)';
       });
 
       setTimeout(() => {
@@ -100,7 +103,7 @@ const ServicesView = () => {
     ScrollTrigger.create({
       trigger: ".page-container",
       start: "center top", // Adjust as needed
-      markers: true,
+      // markers: true,
       onEnter: () => {
         handleImageChange(1);
       },
