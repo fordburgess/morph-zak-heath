@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import WideImage from '../../assets/desert-far.webp';
 import WideImageMobile from '../../assets/desert-far-mobile.webp';
 import OverheadImage from '../../assets/desert-aerial.webp';
+import ExpandedImage from '../../assets/desert-expanded.webp';
 import './styles/services.css';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
@@ -51,6 +52,25 @@ const ServicesView = () => {
     }
   }
 
+  const handleObjectClick = () => {
+    const scrollContainer = document.querySelector('.page-container');
+    const contentContainer = document.querySelector('.content-container');
+
+    scrollContainer.style.transition = 'opacity 0.5s ease-in-out';
+    contentContainer.style.transition = 'opacity 0.25s ease-in-out';
+
+    contentContainer.style.display = 'block';
+    scrollContainer.style.opacity = 0;
+
+    requestAnimationFrame(() => {
+      contentContainer.style.opacity = 1;
+    });
+
+    setTimeout(() => {
+      scrollContainer.style.display = 'none';
+    }, 1200);
+  }
+
   useEffect(() => {
     gsap.to('.initial-image-container', {
       scale: 2,
@@ -91,32 +111,32 @@ const ServicesView = () => {
       scrollTrigger: {
         trigger: ".page-container",
         start: "55% top",
-        end: "bottom top",
+        end: "bottom bottom",
         scrub: true
       }
     })
 
     gsap.to('.further-info-container', {
-      opacity: 1,
+      opacity: 0,
       ease: 'none',
       scrollTrigger: {
         trigger: '.page-container',
         start: '68% top',
-        end: '90% top',
+        end: '85% top',
         scrub: true
       }
     })
 
-    // gsap.to('#further-info', {
-    //   z: 200,
-    //   ease: 'none',
-    //   scrollTrigger: {
-    //     trigger: '.page-container',
-    //     start: '70% top',
-    //     end: '90% top',
-    //     scrub: true
-    //   }
-    // })
+    gsap.to('.test-circle', {
+      opacity: 1,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.page-container',
+        start: '80% top',
+        end: '90% top',
+        scrub: true
+      }
+    })
 
     ScrollTrigger.create({
       trigger: ".page-container",
@@ -132,44 +152,50 @@ const ServicesView = () => {
   }, [])
 
   return (
-    <div className='page-container'>
-      <div className='initial-image-container'>
-        <div className='title-container'>
-          <motion.h1
-            className='page-title'
-            id='services-title'
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1 }}
-          >
-            Services
-          </motion.h1>
+    <>
+      <div className='page-container'>
+        <div className='initial-image-container'>
+          <div className='title-container'>
+            <motion.h1
+              className='page-title'
+              id='services-title'
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              Services
+            </motion.h1>
+          </div>
+          <div className='subtitle-container'>
+            <motion.p
+              className='page-subtitle'
+              id='services-subtitle'
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 1.5, duration: 1 }}
+            >
+              Scroll to continue...
+            </motion.p>
+          </div>
+          <picture>
+            <source media="(min-width: 1024px)" srcSet={WideImage} />
+            <source media="(min-width: 640px)" srcSet={WideImageMobile} />
+            <img src={WideImageMobile} className='initial-image' />
+          </picture>
         </div>
-        <div className='subtitle-container'>
-          <motion.p
-            className='page-subtitle'
-            id='services-subtitle'
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 1.5, duration: 1 }}
-          >
-            Scroll to continue...
-          </motion.p>
+        <div className='svg-overlay-container'>
+          <img src={OverheadImage} className='svg-overlay-test' />
+          <div className='further-info-container'>
+            <h2>CLICK</h2>
+            <p>A WAY TO CONTACT ME</p>
+          </div>
+          <div className='test-circle' onClick={() => handleObjectClick()}></div>
         </div>
-        <picture>
-          <source media="(min-width: 1024px)" srcSet={WideImage} />
-          <source media="(min-width: 640px)" srcSet={WideImageMobile} />
-          <img src={WideImageMobile} className='initial-image' />
-        </picture>
       </div>
-      <div className='svg-overlay-container'>
-        <img src={OverheadImage} className='svg-overlay-test' />
-        <div className='further-info-container'>
-          <h2 id='further-info'>A way to contact me...</h2>
-        </div>
+      <div className='content-container'>
+        <img src={ExpandedImage} />
       </div>
-
-    </div>
+    </>
   )
 }
 
