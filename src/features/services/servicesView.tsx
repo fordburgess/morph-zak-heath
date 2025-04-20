@@ -12,27 +12,27 @@ const ServicesView = () => {
   const [overheadView, setOverheadView] = useState(false);
 
   const handleImageChange = () => {
-//     setOverheadView(prev => !prev);
-//
-//     const initialImageContainer = document.querySelector('.initial-image-container');
-//     const initialImage = document.querySelector('.initial-image');
-//     const svgOverlayContainer = document.querySelector('.svg-overlay-container');
-//
-//     initialImageContainer.style.transition = 'opacity 1.2s ease-in-out'
-//     initialImage.style.transition = 'transform 0.3s ease-in-out';
-//     svgOverlayContainer.style.transition = 'opacity 0.5s ease-in-out';
-//     svgOverlayContainer.style.display = 'inline-block';
-//
-//     initialImage.style.transform = 'scale(2)';
-//     initialImageContainer.style.opacity = 0;
-//
-//     requestAnimationFrame(() => {
-//       svgOverlayContainer.style.opacity = 1;
-//     });
-//
-//     setTimeout(() => {
-//       initialImageContainer.style.display = 'none';
-//     }, 1000);
+    setOverheadView(prev => !prev);
+
+    const initialImageContainer = document.querySelector('.initial-image-container');
+    const initialImage = document.querySelector('.initial-image');
+    const svgOverlayContainer = document.querySelector('.svg-overlay-container');
+
+    initialImageContainer.style.transition = 'opacity 1.2s ease-in-out'
+    initialImage.style.transition = 'transform 0.3s ease-in-out';
+    svgOverlayContainer.style.transition = 'opacity 0.5s ease-in-out';
+    svgOverlayContainer.style.display = 'block';
+
+    initialImage.style.transform = 'scale(2)';
+    initialImageContainer.style.opacity = 0;
+
+    requestAnimationFrame(() => {
+      svgOverlayContainer.style.opacity = 1;
+    });
+
+    setTimeout(() => {
+      initialImageContainer.style.display = 'none';
+    }, 1000);
   }
 
   useEffect(() => {
@@ -49,16 +49,16 @@ const ServicesView = () => {
     // }, "<");
 
 
-    // gsap.to('.initial-image-container', {
-    //   scale: 2,
-    //   ease: 'none',
-    //   scrollTrigger: {
-    //     trigger: ".page-container",
-    //     start: "top top",
-    //     end: "bottom top",
-    //     scrub: true
-    //   }
-    // })
+    gsap.to('.initial-image-container', {
+      scale: 2,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: ".page-container",
+        start: "top top",
+        end: "bottom top",
+        scrub: true
+      }
+    })
 
     gsap.to('.title-container', {
       z: 1500,
@@ -83,12 +83,13 @@ const ServicesView = () => {
     })
 
     gsap.to('.svg-overlay-container', {
-      scale: 2,
+      scale: 1.5,
+      ease: 'none',
       scrollTrigger: {
-        markers: true,
-        trigger: '.page-container',
-        start: 'top top',
-        end: 'bottom top'
+        trigger: ".page-container",
+        start: "60% top",
+        end: "bottom top",
+        scrub: true
       }
     })
 
@@ -103,7 +104,7 @@ const ServicesView = () => {
 
   return (
     <div className='page-container'>
-      {/* <div className='initial-image-container'>
+      <div className='initial-image-container'>
         <div className='title-container'>
           <motion.h1
             className='page-title'
@@ -131,7 +132,7 @@ const ServicesView = () => {
           <source media="(min-width: 640px)" srcSet={WideImageMobile} />
           <img src={WideImageMobile} className='initial-image' />
         </picture>
-      </div> */}
+      </div>
       <div className='svg-overlay-container'>
         <img src={OverheadImage} className='svg-overlay-test' />
       </div>
