@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import WideImage from '../../assets/desert-far.webp';
+import WideImageMobile from '../../assets/desert-far-mobile.webp';
 import OverheadImage from '../../assets/desert-aerial.webp';
 import './styles/services.css';
 import { motion } from 'framer-motion';
@@ -105,7 +106,11 @@ const ServicesView = () => {
             Scroll to continue...
           </motion.p>
         </div>
-        <img src={WideImage} className='initial-image' />
+        <picture>
+          <source media="(min-width: 1024px)" srcSet={WideImage} />
+          <source media="(min-width: 640px)" srcSet={WideImageMobile} />
+          <img src={WideImageMobile} className='initial-image' />
+        </picture>
       </div>
       <img src={OverheadImage} className='svg-overlay-test' />
     </div>
