@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import Matter from "matter-js";
 import MatterWrap from "matter-wrap"; // Make sure this is installed
 import "./styles/adamReed.css"; // Optional CSS
