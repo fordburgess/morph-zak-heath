@@ -12,7 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as ServicesImport } from './routes/services'
-import { Route as LisaEldridgeImport } from './routes/lisaEldridge'
+import { Route as LisaEldridgeImport } from './routes/lisa-eldridge'
 import { Route as FeaturedImport } from './routes/featured'
 import { Route as DreamRoomImport } from './routes/dream-room'
 import { Route as BeautyIconsImport } from './routes/beauty-icons'
@@ -29,8 +29,8 @@ const ServicesRoute = ServicesImport.update({
 } as any)
 
 const LisaEldridgeRoute = LisaEldridgeImport.update({
-  id: '/lisaEldridge',
-  path: '/lisaEldridge',
+  id: '/lisa-eldridge',
+  path: '/lisa-eldridge',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -116,10 +116,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FeaturedImport
       parentRoute: typeof rootRoute
     }
-    '/lisaEldridge': {
-      id: '/lisaEldridge'
-      path: '/lisaEldridge'
-      fullPath: '/lisaEldridge'
+    '/lisa-eldridge': {
+      id: '/lisa-eldridge'
+      path: '/lisa-eldridge'
+      fullPath: '/lisa-eldridge'
       preLoaderRoute: typeof LisaEldridgeImport
       parentRoute: typeof rootRoute
     }
@@ -142,7 +142,7 @@ export interface FileRoutesByFullPath {
   '/beauty-icons': typeof BeautyIconsRoute
   '/dream-room': typeof DreamRoomRoute
   '/featured': typeof FeaturedRoute
-  '/lisaEldridge': typeof LisaEldridgeRoute
+  '/lisa-eldridge': typeof LisaEldridgeRoute
   '/services': typeof ServicesRoute
 }
 
@@ -153,7 +153,7 @@ export interface FileRoutesByTo {
   '/beauty-icons': typeof BeautyIconsRoute
   '/dream-room': typeof DreamRoomRoute
   '/featured': typeof FeaturedRoute
-  '/lisaEldridge': typeof LisaEldridgeRoute
+  '/lisa-eldridge': typeof LisaEldridgeRoute
   '/services': typeof ServicesRoute
 }
 
@@ -165,7 +165,7 @@ export interface FileRoutesById {
   '/beauty-icons': typeof BeautyIconsRoute
   '/dream-room': typeof DreamRoomRoute
   '/featured': typeof FeaturedRoute
-  '/lisaEldridge': typeof LisaEldridgeRoute
+  '/lisa-eldridge': typeof LisaEldridgeRoute
   '/services': typeof ServicesRoute
 }
 
@@ -178,7 +178,7 @@ export interface FileRouteTypes {
     | '/beauty-icons'
     | '/dream-room'
     | '/featured'
-    | '/lisaEldridge'
+    | '/lisa-eldridge'
     | '/services'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -188,7 +188,7 @@ export interface FileRouteTypes {
     | '/beauty-icons'
     | '/dream-room'
     | '/featured'
-    | '/lisaEldridge'
+    | '/lisa-eldridge'
     | '/services'
   id:
     | '__root__'
@@ -198,7 +198,7 @@ export interface FileRouteTypes {
     | '/beauty-icons'
     | '/dream-room'
     | '/featured'
-    | '/lisaEldridge'
+    | '/lisa-eldridge'
     | '/services'
   fileRoutesById: FileRoutesById
 }
@@ -241,7 +241,7 @@ export const routeTree = rootRoute
         "/beauty-icons",
         "/dream-room",
         "/featured",
-        "/lisaEldridge",
+        "/lisa-eldridge",
         "/services"
       ]
     },
@@ -263,8 +263,8 @@ export const routeTree = rootRoute
     "/featured": {
       "filePath": "featured.tsx"
     },
-    "/lisaEldridge": {
-      "filePath": "lisaEldridge.tsx"
+    "/lisa-eldridge": {
+      "filePath": "lisa-eldridge.tsx"
     },
     "/services": {
       "filePath": "services.tsx"

@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import LisaEldridgeView from '../features/articles/lisaEldridgeView'
 
-export const Route = createFileRoute('/lisaEldridge')({
+export const Route = createFileRoute('/lisa-eldridge')({
   component: RouteComponent,
 })
 
