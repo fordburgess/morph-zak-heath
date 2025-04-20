@@ -100,6 +100,7 @@ h1, h2, h3, h4, h5, h6, p {
   width: 100vw;
   opacity: 0;
   z-index: 2;
+  transform: scale(1.2);
 }
 
 .svg-overlay-test {

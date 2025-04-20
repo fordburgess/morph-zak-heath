@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState, useEffect } from 'react';
 import WideImage from '../../assets/desert-far.webp';
 import WideImageMobile from '../../assets/desert-far-mobile.webp';
@@ -9,46 +10,49 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const ServicesView = () => {
-  const [overheadView, setOverheadView] = useState(false);
-
-  const handleImageChange = () => {
-    setOverheadView(prev => !prev);
-
+  const handleImageChange = (direction: number) => { // direction is the way the user is travelling
     const initialImageContainer = document.querySelector('.initial-image-container');
     const initialImage = document.querySelector('.initial-image');
     const svgOverlayContainer = document.querySelector('.svg-overlay-container');
 
-    initialImageContainer.style.transition = 'opacity 1.2s ease-in-out'
-    initialImage.style.transition = 'transform 0.3s ease-in-out';
-    svgOverlayContainer.style.transition = 'opacity 0.5s ease-in-out';
-    svgOverlayContainer.style.display = 'block';
+    if (direction == 0) {
+      svgOverlayContainer.style.transition = 'opacity 1.2s ease-in-out';
+      svgOverlayContainer.style.transition = 'transform 0.3s ease-in-out';
+      initialImageContainer.style.transition = 'opacity 0.5s ease-in-out';
+      initialImageContainer.style.display = 'block';
 
-    initialImage.style.transform = 'scale(2)';
-    initialImageContainer.style.opacity = 0;
+      // svgOverlayContainer.style.opacity = 0;
 
-    requestAnimationFrame(() => {
-      svgOverlayContainer.style.opacity = 1;
-    });
+      initialImage.style.transform = 'scale(1)';
 
-    setTimeout(() => {
-      initialImageContainer.style.display = 'none';
-    }, 1000);
+      requestAnimationFrame(() => {
+        initialImageContainer.style.opacity = 1;
+      });
+
+      setTimeout(() => {
+        svgOverlayContainer.style.display = 'none';
+      }, 1000);
+    }
+    else if (direction == 1) {
+      initialImageContainer.style.transition = 'opacity 1.2s ease-in-out'
+      initialImage.style.transition = 'transform 0.3s ease-in-out';
+      svgOverlayContainer.style.transition = 'opacity 0.5s ease-in-out';
+      svgOverlayContainer.style.display = 'block';
+
+      initialImage.style.transform = 'scale(2)';
+      initialImageContainer.style.opacity = 0;
+
+      requestAnimationFrame(() => {
+        svgOverlayContainer.style.opacity = 1;
+      });
+
+      setTimeout(() => {
+        initialImageContainer.style.display = 'none';
+      }, 1000);
+    }
   }
 
   useEffect(() => {
-
-    // .to('.svg-overlay-container', {
-    //   opacity: 1,
-    //   duration: 1,
-    //   onStart: () => {
-    //     document.querySelector('.svg-overlay-container').style.display = 'inline-block';
-    //   },
-    //   onReverseComplete: () => {
-    //     document.querySelector('.svg-overlay-container').style.display = 'none';
-    //   }
-    // }, "<");
-
-
     gsap.to('.initial-image-container', {
       scale: 2,
       ease: 'none',
@@ -96,9 +100,13 @@ const ServicesView = () => {
     ScrollTrigger.create({
       trigger: ".page-container",
       start: "center top", // Adjust as needed
+      markers: true,
       onEnter: () => {
-        handleImageChange();
+        handleImageChange(1);
       },
+      onLeaveBack: () => {
+        handleImageChange(0);
+      }
     })
   }, [])
 
