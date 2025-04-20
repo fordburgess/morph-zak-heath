@@ -48,6 +48,7 @@ h1 {
 
 h1, h2, h3, h4, h5, h6, p {
   margin: 0;
+  font-family: 'Josefin Sans';
 }
 
 .page-container {
@@ -64,6 +65,7 @@ h1, h2, h3, h4, h5, h6, p {
   object-position: center;
   position: sticky;
   top: 0;
+  perspective: 1000px;
 }
 
 .initial-image {
@@ -73,9 +75,24 @@ h1, h2, h3, h4, h5, h6, p {
   z-index: 1;
 }
 
-.page-title {
+.title-container, .subtitle-container {
+  width: 100%;
   position: absolute;
+  text-align: center;
+  transform-style: preserve-3d;
 }
+
+.title-container {
+  top: 10%;
+}
+
+.subtitle-container {
+  bottom: 20%;
+}
+
+/* .page-title {
+  transform-style: preserve-3d;
+} */
 
 .svg-overlay-test {
   display: none;

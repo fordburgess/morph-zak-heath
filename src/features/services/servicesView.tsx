@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import WideImage from '../../assets/desert-far.webp';
 import OverheadImage from '../../assets/desert-aerial.webp';
+import './styles/services.css';
+import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
@@ -9,7 +11,6 @@ const ServicesView = () => {
   const [overheadView, setOverheadView] = useState(false);
 
   const handleImageChange = () => {
-    console.log("hello world")
     setOverheadView(prev => !prev);
 
     const initialImageContainer = document.querySelector('.initial-image-container');
@@ -45,6 +46,28 @@ const ServicesView = () => {
       }
     })
 
+    gsap.to('.title-container', {
+      z: 1500,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.page-container',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: true,
+      }
+    })
+
+    gsap.to('.subtitle-container', {
+      z: 800,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.page-container',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: true,
+      }
+    })
+
     ScrollTrigger.create({
       trigger: ".page-container",
       start: "center top", // Adjust as needed
@@ -57,14 +80,31 @@ const ServicesView = () => {
     });
   }, [])
 
-  useEffect(() => {
-    console.log(overheadView)
-  }, [overheadView])
-
   return (
     <div className='page-container'>
       <div className='initial-image-container'>
-        <h1 className='page-title'>Services</h1>
+        <div className='title-container'>
+          <motion.h1
+            className='page-title'
+            id='services-title'
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1 }}
+          >
+            Services
+          </motion.h1>
+        </div>
+        <div className='subtitle-container'>
+          <motion.p
+            className='page-subtitle'
+            id='services-subtitle'
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 1.5, duration: 1 }}
+          >
+            Scroll to continue...
+          </motion.p>
+        </div>
         <img src={WideImage} className='initial-image' />
       </div>
       <img src={OverheadImage} className='svg-overlay-test' />
