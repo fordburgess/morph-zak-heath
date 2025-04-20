@@ -40,8 +40,8 @@ const FeaturedRoute = FeaturedImport.update({
 } as any)
 
 const BeautyIconsRoute = BeautyIconsImport.update({
-  id: '/beauty-icons',
-  path: '/beauty-icons',
+  id: '/beautyIcons',
+  path: '/beautyIcons',
   getParentRoute: () => rootRoute,
 } as any)
 
