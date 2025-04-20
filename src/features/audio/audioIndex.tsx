@@ -51,6 +51,24 @@ const AudioIndexView = () => {
     }
   }
 
+  const handleObjectClick = () => {
+    const scrollContainer = document.querySelector('.scroll-container');
+    const contentContainer = document.querySelector('.content-container');
+
+    scrollContainer.style.transition = 'opacity 0.5s ease-in-out';
+    contentContainer.style.transition = 'opacity 0.25s ease-in-out';
+
+    contentContainer.style.display = 'block';
+    scrollContainer.style.opacity = 0;
+
+    requestAnimationFrame(() => {
+      contentContainer.style.opacity = 1;
+    });
+
+    setTimeout(() => {
+      scrollContainer.style.display = 'none';
+    }, 1200);
+  }
 
   useEffect(() => {
     gsap.to('.initial-image-container', {
@@ -134,7 +152,7 @@ const AudioIndexView = () => {
 
   return (
     <>
-      <div className='scroll-container'>
+      <div className='scroll-container' style={{ }}>
         <div className='initial-image-container'>
           <div className='title-container'>
             <motion.h1
@@ -167,8 +185,8 @@ const AudioIndexView = () => {
         <div className='svg-overlay-container'>
           <img src={OverheadImage} className='svg-overlay-test' />
           <div className='further-info-container'>
-            <h2>CLICK</h2>
-            <p>A WAY TO CONTACT ME</p>
+            <h2>HINT</h2>
+            <p>YOU CAN READ BUT YOU CAN'T OPEN</p>
           </div>
           <div className='test-circle' onClick={() => handleObjectClick()}></div>
         </div>
