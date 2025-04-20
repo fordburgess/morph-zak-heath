@@ -53,7 +53,7 @@ const ServicesView = () => {
   }
 
   const handleObjectClick = () => {
-    const scrollContainer = document.querySelector('.page-container');
+    const scrollContainer = document.querySelector('.scroll-container');
     const contentContainer = document.querySelector('.content-container');
 
     scrollContainer.style.transition = 'opacity 0.5s ease-in-out';
@@ -76,7 +76,7 @@ const ServicesView = () => {
       scale: 2,
       ease: 'none',
       scrollTrigger: {
-        trigger: ".page-container",
+        trigger: ".scroll-container",
         start: "top top",
         end: "bottom top",
         scrub: true
@@ -87,7 +87,7 @@ const ServicesView = () => {
       z: 1500,
       ease: 'none',
       scrollTrigger: {
-        trigger: '.page-container',
+        trigger: '.scroll-container',
         start: 'top top',
         end: 'bottom bottom',
         scrub: true,
@@ -98,7 +98,7 @@ const ServicesView = () => {
       z: 800,
       ease: 'none',
       scrollTrigger: {
-        trigger: '.page-container',
+        trigger: '.scroll-container',
         start: 'top top',
         end: 'bottom bottom',
         scrub: true,
@@ -109,7 +109,7 @@ const ServicesView = () => {
       scale: 1.5,
       ease: 'none',
       scrollTrigger: {
-        trigger: ".page-container",
+        trigger: ".scroll-container",
         start: "55% top",
         end: "bottom bottom",
         scrub: true
@@ -120,7 +120,7 @@ const ServicesView = () => {
       opacity: 0,
       ease: 'none',
       scrollTrigger: {
-        trigger: '.page-container',
+        trigger: '.scroll-container',
         start: '68% top',
         end: '85% top',
         scrub: true
@@ -131,7 +131,7 @@ const ServicesView = () => {
       opacity: 1,
       ease: 'none',
       scrollTrigger: {
-        trigger: '.page-container',
+        trigger: '.scroll-container',
         start: '80% top',
         end: '90% top',
         scrub: true
@@ -139,7 +139,7 @@ const ServicesView = () => {
     })
 
     ScrollTrigger.create({
-      trigger: ".page-container",
+      trigger: ".scroll-container",
       start: "center top", // Adjust as needed
       // markers: true,
       onEnter: () => {
@@ -153,7 +153,7 @@ const ServicesView = () => {
 
   return (
     <>
-      <div className='page-container'>
+      <div className='scroll-container'>
         <div className='initial-image-container'>
           <div className='title-container'>
             <motion.h1
