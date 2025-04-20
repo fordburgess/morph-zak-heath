@@ -1,0 +1,157 @@
+body {
+  background-position: center;
+  background-size: cover;
+  color: #fff;
+}
+
+p {
+  font-family: 'Josefin Sans';
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../../../assets/spring-expanded.jpg') center / cover no-repeat;
+  filter: brightness(88%) blur(3px);
+  z-index: -1;
+}
+
+.article-container {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  /* overflow: hidden; */
+}
+
+.article-title {
+  font-size: 3rem;
+}
+
+.article-subtitle {
+  font-size: 2rem;
+}
+
+.lisa-eldridge-header {
+  padding: 50px;
+  text-align: left;
+  transition: opacity 0.2s;
+}
+
+.bubble {
+  position: absolute;
+  border-radius: 500px;
+  height: 250px;
+  width: 250px;
+  color: #000;
+  z-index: 5;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  transition: height 1s, width 1s;
+
+  h3 {
+    font-family: 'Josefin Sans';
+    font-weight: 300;
+    font-size: 1.25rem;
+  }
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.active-text-container {
+  text-align: left;
+  h3 {
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: 1.25rem;
+  }
+}
+
+.content-overlay {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(10px) brightness(75%);
+  visibility: hidden;
+  opacity: 0;
+  transition: backdrop-filter 0.5s;
+  z-index: 10;
+}
+
+.content-modal {
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  padding: 100px 100px 50px;
+  box-sizing: border-box;
+
+  h1 {
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 1.25rem;
+  }
+
+  img {
+    max-height: 100%;
+    max-width: 29%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px;
+  }
+}
+
+.nav-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: red; */
+
+  img {
+    height: 50px;
+    width: 50px;
+  }
+}
+
+.nav-section {
+  height: 50px;
+  width: 50px;
+  padding: 10px;
+  border-radius: 50%;
+  position: relative;
+  transition: background-color 0.2s;
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+}
