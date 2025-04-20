@@ -36,49 +36,87 @@ const ServicesView = () => {
   }
 
   useEffect(() => {
-    gsap.to('.initial-image-container', {
-      scale: 2,
-      ease: 'none',
+    const timeline = gsap.timeline({
       scrollTrigger: {
-        trigger: ".page-container",
-        start: "top top",
-        end: "bottom top",
+        trigger: '.page-container',
+        start: 'top top',
+        end: 'bottom top',
         scrub: true
       }
     })
 
-    gsap.to('.title-container', {
+    timeline.to('.initial-image-container', {
+      scale: 2,
+    })
+    .to('.title-container', {
       z: 1500,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '.page-container',
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: true,
-      }
-    })
+    }, "<")
+    .to('.subtitle-container', {
+      z: 800
+    }, "<")
+    .to('.svg-overlay-container', {
+      scale: 1.5
+    }, 0.20)
+    .to('.svg-overlay-container', {
+      opacity: 1,
+    }, 0.25)
+    .to('.initial-image-container', {
+      opacity: 0,
+      ease: 'power2.inOut',
+    }, 0.55)
 
-    gsap.to('.subtitle-container', {
-      z: 800,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '.page-container',
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: true,
-      }
-    })
+    // .to('.svg-overlay-container', {
+    //   opacity: 1,
+    //   duration: 1,
+    //   onStart: () => {
+    //     document.querySelector('.svg-overlay-container').style.display = 'inline-block';
+    //   },
+    //   onReverseComplete: () => {
+    //     document.querySelector('.svg-overlay-container').style.display = 'none';
+    //   }
+    // }, "<");
 
-    ScrollTrigger.create({
-      trigger: ".page-container",
-      start: "center top", // Adjust as needed
-      onEnter: () => {
-        handleImageChange();
-      },
-      // onLeaveBack: () => {
-      //   console.log('going back')
-      // }
-    });
+
+//     gsap.to('.initial-image-container', {
+//       scale: 2,
+//       ease: 'none',
+//       scrollTrigger: {
+//         trigger: ".page-container",
+//         start: "top top",
+//         end: "bottom top",
+//         scrub: true
+//       }
+//     })
+//
+//     gsap.to('.title-container', {
+//       z: 1500,
+//       ease: 'none',
+//       scrollTrigger: {
+//         trigger: '.page-container',
+//         start: 'top top',
+//         end: 'bottom bottom',
+//         scrub: true,
+//       }
+//     })
+//
+//     gsap.to('.subtitle-container', {
+//       z: 800,
+//       ease: 'none',
+//       scrollTrigger: {
+//         trigger: '.page-container',
+//         start: 'top top',
+//         end: 'bottom bottom',
+//         scrub: true,
+//       }
+//     })
+//
+//     ScrollTrigger.create({
+//       trigger: ".page-container",
+//       start: "center top", // Adjust as needed
+//       onEnter: () => {
+//         handleImageChange();
+//       },
+//     });
   }, [])
 
   return (
