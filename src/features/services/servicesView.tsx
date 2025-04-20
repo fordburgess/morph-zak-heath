@@ -18,7 +18,7 @@ const ServicesView = () => {
     if (direction == 0) {
       initialImageContainer.style.display = 'block';
 
-      svgOverlayContainer.style.transition = 'opacity 1.2s ease-in-out, transform 0.3s ease-in-out';
+      svgOverlayContainer.style.transition = 'opacity 0.5s ease-in-out, transform 0.3s ease-in-out';
       initialImageContainer.style.transition = 'opacity 0.75s ease-in-out';
       initialImage.style.transition = 'transform 0.3s ease-in-out';
 
@@ -96,6 +96,28 @@ const ServicesView = () => {
       }
     })
 
+    gsap.to('.further-info-container', {
+      opacity: 1,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.page-container',
+        start: '68% top',
+        end: '90% top',
+        scrub: true
+      }
+    })
+
+    // gsap.to('#further-info', {
+    //   z: 200,
+    //   ease: 'none',
+    //   scrollTrigger: {
+    //     trigger: '.page-container',
+    //     start: '70% top',
+    //     end: '90% top',
+    //     scrub: true
+    //   }
+    // })
+
     ScrollTrigger.create({
       trigger: ".page-container",
       start: "center top", // Adjust as needed
@@ -142,7 +164,11 @@ const ServicesView = () => {
       </div>
       <div className='svg-overlay-container'>
         <img src={OverheadImage} className='svg-overlay-test' />
+        <div className='further-info-container'>
+          <h2 id='further-info'>A way to contact me...</h2>
+        </div>
       </div>
+
     </div>
   )
 }
