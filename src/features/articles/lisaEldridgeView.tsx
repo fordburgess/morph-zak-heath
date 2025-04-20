@@ -202,20 +202,31 @@ const LisaEldridgeView = () => {
       const bubbles = document.querySelectorAll('.bubble');
       bubbles.forEach((bubble: HTMLDivElement, i: number) => {
 
+        bubble.style.transition = `
+          height 1s,
+          width 1s,
+          top 5s cubic-bezier(0.25, 0.8, 0.25, 1),
+          left 5s cubic-bezier(0.25, 0.8, 0.25, 1),
+          transform 0.5s ease
+        `
+
         if (i == index) {
-          // document.getElementById(`item-s`)
+          bubble.style.height = '600px';
+          bubble.style.width = '600px';
+          bubble.style.top = '10%';
+          bubble.style.left = '10%';
         }
         else {
           const randomX = Math.random() < 0.5 ? -Math.abs(Math.random() * (2000 - 1000) + 1000) : Math.abs(Math.random() * (2000 - 1000) + 1000);
           const randomY = Math.random() < 0.5 ? -Math.abs(Math.random() * (2000 - 1000) + 1000) : Math.abs(Math.random() * (2000 - 1000) + 1000);
 
-          bubble.style.transition = `
-            height 15s cubic-bezier(0.25, 0.8, 0.25, 1),
-            width 15s cubic-bezier(0.25, 0.8, 0.25, 1),
-            top 5s cubic-bezier(0.25, 0.8, 0.25, 1),
-            left 5s cubic-bezier(0.25, 0.8, 0.25, 1),
-            transform 0.5s ease
-          `
+          // bubble.style.transition = `
+          //   height 1s,
+          //   width 1s,
+          //   top 5s cubic-bezier(0.25, 0.8, 0.25, 1),
+          //   left 5s cubic-bezier(0.25, 0.8, 0.25, 1),
+          //   transform 0.5s ease
+          // `
           bubble.style.left = `${randomX}px`;
           bubble.style.top = `${randomY}px`;
         }
@@ -243,11 +254,20 @@ const LisaEldridgeView = () => {
         const pos = positionsRef.current[i];
         if (!pos) return;
 
-        bubble.style.transition = 'top 2s cubic-bezier(0.25, 0.8, 0.25, 1), left 2s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.5s ease';
+        bubble.style.transition = `
+          height 1s,
+          width 1s,
+          top 2s cubic-bezier(0.25, 0.8, 0.25, 1),
+          left 2s cubic-bezier(0.25, 0.8, 0.25, 1),
+          transform 0.5s ease
+        `
         bubble.style.left = `${pos.left}px`;
         bubble.style.top = `${pos.top}px`;
+        bubble.style.height = '250px';
+        bubble.style.width = '250px';
         bubble.classList.remove('active');
         document.getElementById(`text-container-${i}`)?.classList.remove('active-text-container');
+
         // setTimeout(() => {
         //   bubble.style.transition = '';
         // }, 4000);
