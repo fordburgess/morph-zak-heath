@@ -14,8 +14,6 @@ const ServicesView = () => {
     const initialImageContainer = document.querySelector('.initial-image-container');
     const initialImage = document.querySelector('.initial-image');
     const svgOverlayContainer = document.querySelector('.svg-overlay-container');
-    const title = document.getElementById('services-title');
-    const subtitle = document.getElementById('services-subtitle');
 
     if (direction == 0) {
       initialImageContainer.style.display = 'block';
@@ -23,8 +21,6 @@ const ServicesView = () => {
       svgOverlayContainer.style.transition = 'opacity 1.2s ease-in-out, transform 0.3s ease-in-out';
       initialImageContainer.style.transition = 'opacity 0.75s ease-in-out';
       initialImage.style.transition = 'transform 0.3s ease-in-out';
-
-      // svgOverlayContainer.style.opacity = 0;
 
       requestAnimationFrame(() => {
         svgOverlayContainer.style.opacity = 0;
