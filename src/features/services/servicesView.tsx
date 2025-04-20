@@ -12,58 +12,30 @@ const ServicesView = () => {
   const [overheadView, setOverheadView] = useState(false);
 
   const handleImageChange = () => {
-    setOverheadView(prev => !prev);
-
-    const initialImageContainer = document.querySelector('.initial-image-container');
-    const initialImage = document.querySelector('.initial-image');
-    const svgOverlayContainer = document.querySelector('.svg-overlay-container');
-
-    initialImageContainer.style.transition = 'opacity 1.2s ease-in-out'
-    initialImage.style.transition = 'transform 0.3s ease-in-out';
-    svgOverlayContainer.style.transition = 'opacity 0.5s ease-in-out';
-    svgOverlayContainer.style.display = 'inline-block';
-
-    initialImage.style.transform = 'scale(2)';
-    initialImageContainer.style.opacity = 0;
-
-    requestAnimationFrame(() => {
-      svgOverlayContainer.style.opacity = 1;
-    });
-
-    setTimeout(() => {
-      initialImageContainer.style.display = 'none';
-    }, 1000);
+//     setOverheadView(prev => !prev);
+//
+//     const initialImageContainer = document.querySelector('.initial-image-container');
+//     const initialImage = document.querySelector('.initial-image');
+//     const svgOverlayContainer = document.querySelector('.svg-overlay-container');
+//
+//     initialImageContainer.style.transition = 'opacity 1.2s ease-in-out'
+//     initialImage.style.transition = 'transform 0.3s ease-in-out';
+//     svgOverlayContainer.style.transition = 'opacity 0.5s ease-in-out';
+//     svgOverlayContainer.style.display = 'inline-block';
+//
+//     initialImage.style.transform = 'scale(2)';
+//     initialImageContainer.style.opacity = 0;
+//
+//     requestAnimationFrame(() => {
+//       svgOverlayContainer.style.opacity = 1;
+//     });
+//
+//     setTimeout(() => {
+//       initialImageContainer.style.display = 'none';
+//     }, 1000);
   }
 
   useEffect(() => {
-    const timeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: '.page-container',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true
-      }
-    })
-
-    timeline.to('.initial-image-container', {
-      scale: 2,
-    })
-    .to('.title-container', {
-      z: 1500,
-    }, "<")
-    .to('.subtitle-container', {
-      z: 800
-    }, "<")
-    .to('.svg-overlay-container', {
-      scale: 1.5
-    }, 0.20)
-    .to('.svg-overlay-container', {
-      opacity: 1,
-    }, 0.25)
-    .to('.initial-image-container', {
-      opacity: 0,
-      ease: 'power2.inOut',
-    }, 0.55)
 
     // .to('.svg-overlay-container', {
     //   opacity: 1,
@@ -77,51 +49,61 @@ const ServicesView = () => {
     // }, "<");
 
 
-//     gsap.to('.initial-image-container', {
-//       scale: 2,
-//       ease: 'none',
-//       scrollTrigger: {
-//         trigger: ".page-container",
-//         start: "top top",
-//         end: "bottom top",
-//         scrub: true
-//       }
-//     })
-//
-//     gsap.to('.title-container', {
-//       z: 1500,
-//       ease: 'none',
-//       scrollTrigger: {
-//         trigger: '.page-container',
-//         start: 'top top',
-//         end: 'bottom bottom',
-//         scrub: true,
-//       }
-//     })
-//
-//     gsap.to('.subtitle-container', {
-//       z: 800,
-//       ease: 'none',
-//       scrollTrigger: {
-//         trigger: '.page-container',
-//         start: 'top top',
-//         end: 'bottom bottom',
-//         scrub: true,
-//       }
-//     })
-//
-//     ScrollTrigger.create({
-//       trigger: ".page-container",
-//       start: "center top", // Adjust as needed
-//       onEnter: () => {
-//         handleImageChange();
-//       },
-//     });
+    // gsap.to('.initial-image-container', {
+    //   scale: 2,
+    //   ease: 'none',
+    //   scrollTrigger: {
+    //     trigger: ".page-container",
+    //     start: "top top",
+    //     end: "bottom top",
+    //     scrub: true
+    //   }
+    // })
+
+    gsap.to('.title-container', {
+      z: 1500,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.page-container',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: true,
+      }
+    })
+
+    gsap.to('.subtitle-container', {
+      z: 800,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.page-container',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: true,
+      }
+    })
+
+    gsap.to('.svg-overlay-container', {
+      scale: 2,
+      scrollTrigger: {
+        markers: true,
+        trigger: '.page-container',
+        start: 'top top',
+        end: 'bottom top'
+      }
+    })
+
+    ScrollTrigger.create({
+      trigger: ".page-container",
+      start: "center top", // Adjust as needed
+      onEnter: () => {
+        handleImageChange();
+      },
+    })
   }, [])
 
   return (
     <div className='page-container'>
-      <div className='initial-image-container'>
+      {/* <div className='initial-image-container'>
         <div className='title-container'>
           <motion.h1
             className='page-title'
@@ -149,7 +131,7 @@ const ServicesView = () => {
           <source media="(min-width: 640px)" srcSet={WideImageMobile} />
           <img src={WideImageMobile} className='initial-image' />
         </picture>
-      </div>
+      </div> */}
       <div className='svg-overlay-container'>
         <img src={OverheadImage} className='svg-overlay-test' />
       </div>
