@@ -14,7 +14,8 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as ServicesImport } from './routes/services'
 import { Route as LisaEldridgeImport } from './routes/lisaEldridge'
 import { Route as FeaturedImport } from './routes/featured'
-import { Route as BeautyImport } from './routes/beauty'
+import { Route as DreamRoomImport } from './routes/dream-room'
+import { Route as BeautyIconsImport } from './routes/beauty-icons'
 import { Route as AudioImport } from './routes/audio'
 import { Route as AdamReedImport } from './routes/adamReed'
 import { Route as IndexImport } from './routes/index'
@@ -39,9 +40,15 @@ const FeaturedRoute = FeaturedImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const BeautyRoute = BeautyImport.update({
-  id: '/beauty',
-  path: '/beauty',
+const DreamRoomRoute = DreamRoomImport.update({
+  id: '/dream-room',
+  path: '/dream-room',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const BeautyIconsRoute = BeautyIconsImport.update({
+  id: '/beauty-icons',
+  path: '/beauty-icons',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -88,11 +95,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AudioImport
       parentRoute: typeof rootRoute
     }
-    '/beauty': {
-      id: '/beauty'
-      path: '/beauty'
-      fullPath: '/beauty'
-      preLoaderRoute: typeof BeautyImport
+    '/beauty-icons': {
+      id: '/beauty-icons'
+      path: '/beauty-icons'
+      fullPath: '/beauty-icons'
+      preLoaderRoute: typeof BeautyIconsImport
+      parentRoute: typeof rootRoute
+    }
+    '/dream-room': {
+      id: '/dream-room'
+      path: '/dream-room'
+      fullPath: '/dream-room'
+      preLoaderRoute: typeof DreamRoomImport
       parentRoute: typeof rootRoute
     }
     '/featured': {
@@ -125,7 +139,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/adamReed': typeof AdamReedRoute
   '/audio': typeof AudioRoute
-  '/beauty': typeof BeautyRoute
+  '/beauty-icons': typeof BeautyIconsRoute
+  '/dream-room': typeof DreamRoomRoute
   '/featured': typeof FeaturedRoute
   '/lisaEldridge': typeof LisaEldridgeRoute
   '/services': typeof ServicesRoute
@@ -135,7 +150,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/adamReed': typeof AdamReedRoute
   '/audio': typeof AudioRoute
-  '/beauty': typeof BeautyRoute
+  '/beauty-icons': typeof BeautyIconsRoute
+  '/dream-room': typeof DreamRoomRoute
   '/featured': typeof FeaturedRoute
   '/lisaEldridge': typeof LisaEldridgeRoute
   '/services': typeof ServicesRoute
@@ -146,7 +162,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/adamReed': typeof AdamReedRoute
   '/audio': typeof AudioRoute
-  '/beauty': typeof BeautyRoute
+  '/beauty-icons': typeof BeautyIconsRoute
+  '/dream-room': typeof DreamRoomRoute
   '/featured': typeof FeaturedRoute
   '/lisaEldridge': typeof LisaEldridgeRoute
   '/services': typeof ServicesRoute
@@ -158,7 +175,8 @@ export interface FileRouteTypes {
     | '/'
     | '/adamReed'
     | '/audio'
-    | '/beauty'
+    | '/beauty-icons'
+    | '/dream-room'
     | '/featured'
     | '/lisaEldridge'
     | '/services'
@@ -167,7 +185,8 @@ export interface FileRouteTypes {
     | '/'
     | '/adamReed'
     | '/audio'
-    | '/beauty'
+    | '/beauty-icons'
+    | '/dream-room'
     | '/featured'
     | '/lisaEldridge'
     | '/services'
@@ -176,7 +195,8 @@ export interface FileRouteTypes {
     | '/'
     | '/adamReed'
     | '/audio'
-    | '/beauty'
+    | '/beauty-icons'
+    | '/dream-room'
     | '/featured'
     | '/lisaEldridge'
     | '/services'
@@ -187,7 +207,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdamReedRoute: typeof AdamReedRoute
   AudioRoute: typeof AudioRoute
-  BeautyRoute: typeof BeautyRoute
+  BeautyIconsRoute: typeof BeautyIconsRoute
+  DreamRoomRoute: typeof DreamRoomRoute
   FeaturedRoute: typeof FeaturedRoute
   LisaEldridgeRoute: typeof LisaEldridgeRoute
   ServicesRoute: typeof ServicesRoute
@@ -197,7 +218,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdamReedRoute: AdamReedRoute,
   AudioRoute: AudioRoute,
-  BeautyRoute: BeautyRoute,
+  BeautyIconsRoute: BeautyIconsRoute,
+  DreamRoomRoute: DreamRoomRoute,
   FeaturedRoute: FeaturedRoute,
   LisaEldridgeRoute: LisaEldridgeRoute,
   ServicesRoute: ServicesRoute,
@@ -216,7 +238,8 @@ export const routeTree = rootRoute
         "/",
         "/adamReed",
         "/audio",
-        "/beauty",
+        "/beauty-icons",
+        "/dream-room",
         "/featured",
         "/lisaEldridge",
         "/services"
@@ -231,8 +254,11 @@ export const routeTree = rootRoute
     "/audio": {
       "filePath": "audio.tsx"
     },
-    "/beauty": {
-      "filePath": "beauty.tsx"
+    "/beauty-icons": {
+      "filePath": "beauty-icons.tsx"
+    },
+    "/dream-room": {
+      "filePath": "dream-room.tsx"
     },
     "/featured": {
       "filePath": "featured.tsx"
