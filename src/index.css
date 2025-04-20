@@ -92,11 +92,7 @@ h1, h2, h3, h4, h5, h6, p {
   bottom: 20%;
 }
 
-/* .page-title {
-  transform-style: preserve-3d;
-} */
-
-.svg-overlay-test {
+.svg-overlay-container {
   display: none;
   position: sticky;
   top: 0;
@@ -104,6 +100,12 @@ h1, h2, h3, h4, h5, h6, p {
   width: 100vw;
   opacity: 0;
   z-index: 2;
+}
+
+.svg-overlay-test {
+  height: 100%;
+  width: 100%;
+  transform: scale(1.3);
 }
 
 @media (prefers-color-scheme: light) {

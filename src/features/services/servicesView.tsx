@@ -16,18 +16,18 @@ const ServicesView = () => {
 
     const initialImageContainer = document.querySelector('.initial-image-container');
     const initialImage = document.querySelector('.initial-image');
-    const svgOverlay = document.querySelector('.svg-overlay-test');
+    const svgOverlayContainer = document.querySelector('.svg-overlay-container');
 
     initialImageContainer.style.transition = 'opacity 1.2s ease-in-out'
     initialImage.style.transition = 'transform 0.3s ease-in-out';
-    svgOverlay.style.transition = 'opacity 0.5s ease-in-out';
-    svgOverlay.style.display = 'inline-block';
+    svgOverlayContainer.style.transition = 'opacity 0.5s ease-in-out';
+    svgOverlayContainer.style.display = 'inline-block';
 
     initialImage.style.transform = 'scale(2)';
     initialImageContainer.style.opacity = 0;
 
     requestAnimationFrame(() => {
-      svgOverlay.style.opacity = 1;
+      svgOverlayContainer.style.opacity = 1;
     });
 
     setTimeout(() => {
@@ -112,7 +112,9 @@ const ServicesView = () => {
           <img src={WideImageMobile} className='initial-image' />
         </picture>
       </div>
-      <img src={OverheadImage} className='svg-overlay-test' />
+      <div className='svg-overlay-container'>
+        <img src={OverheadImage} className='svg-overlay-test' />
+      </div>
     </div>
   )
 }
