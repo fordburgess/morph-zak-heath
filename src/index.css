@@ -107,26 +107,6 @@ h1, h2, h3, h4, h5, h6, p {
   transform-origin: center center;
 }
 
-.content-container {
-  display: none;
-  height: 100vh;
-  width: 100vw;
-  position: fixed;
-  top: 0;
-  z-index: 20;
-  opacity: 0;
-}
-
-.content-container img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  object-fit: cover;
-  object-position: center;
-}
-
 .further-info-container {
   backdrop-filter: blur(5px);
   position: absolute;
@@ -174,4 +154,58 @@ h1, h2, h3, h4, h5, h6, p {
 
 .test-circle:hover {
   cursor: pointer;
+}
+
+.content-container {
+  display: none;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  z-index: 20;
+  opacity: 0;
+}
+
+.content-container-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 200vw;
+  object-fit: cover;
+  object-position: center;
+}
+
+.profile-container {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  z-index: 100;
+  padding: 0 100px;
+  box-sizing: border-box;
+}
+
+.profile-circle {
+  flex: 0 0 auto; /* Ensure it doesn't shrink */
+  height: 400px;
+  width: 400px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile-circle:not(:last-child) {
+  margin-right: 100px;
+}
+
+.profile-image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
 }
