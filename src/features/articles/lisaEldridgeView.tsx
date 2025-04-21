@@ -205,34 +205,44 @@ const LisaEldridgeView = () => {
         bubble.style.transition = `
           height 1s,
           width 1s,
-          top 5s cubic-bezier(0.25, 0.8, 0.25, 1),
-          left 5s cubic-bezier(0.25, 0.8, 0.25, 1),
+          top 1.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+          left 1.5s cubic-bezier(0.25, 0.8, 0.25, 1),
           transform 0.5s ease
         `
 
         if (i == index) {
-          bubble.style.height = '600px';
-          bubble.style.width = '600px';
-          bubble.style.top = '10%';
-          bubble.style.left = '10%';
+          const itemTitle = document.getElementById(`item-title-${index}`);
+          const itemText = document.getElementById(`item-text-${index}`);
+
+          bubble.style.top = '50%';
+          bubble.style.left = '50%';
+          bubble.style.transform = 'translate(-50%, -50%) scale(4)';
+          bubble.style.padding = '100px';
+
+          // setTimeout(() => {
+          //   bubble.style.height = '90vh';
+          //   bubble.style.width = '90vh';
+          // }, 1000);
+
+          setTimeout(() => {
+            itemTitle.style.fontSize = '0.85rem';
+            // itemTitle.style.marginBottom = '25px';
+            itemText.style.display = 'block'
+            itemText.style.opacity = '1';
+          }, 1500);
         }
         else {
           const randomX = Math.random() < 0.5 ? -Math.abs(Math.random() * (2000 - 1000) + 1000) : Math.abs(Math.random() * (2000 - 1000) + 1000);
           const randomY = Math.random() < 0.5 ? -Math.abs(Math.random() * (2000 - 1000) + 1000) : Math.abs(Math.random() * (2000 - 1000) + 1000);
 
-          // bubble.style.transition = `
-          //   height 1s,
-          //   width 1s,
-          //   top 5s cubic-bezier(0.25, 0.8, 0.25, 1),
-          //   left 5s cubic-bezier(0.25, 0.8, 0.25, 1),
-          //   transform 0.5s ease
-          // `
+          bubble.style.transition = `
+            top 5s cubic-bezier(0.25, 0.8, 0.25, 1),
+            left 5s cubic-bezier(0.25, 0.8, 0.25, 1),
+          `
           bubble.style.left = `${randomX}px`;
           bubble.style.top = `${randomY}px`;
         }
       })
-
-
     }
   }
 
@@ -301,7 +311,8 @@ const LisaEldridgeView = () => {
               {
                 question.question ? (
                   <div id={`text-container-${index}`}>
-                    <h3>{question.question}</h3>
+                    <h3 className='item-title' id={`item-title-${index}`}>{question.question}</h3>
+                    <p className='item-text' id={`item-text-${index}`}>{question.answer}</p>
                   </div>
                 ) : (
                   <img src={question.image} />
