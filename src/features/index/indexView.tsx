@@ -1,50 +1,15 @@
 // @ts-nocheck
 import { useState, useEffect } from 'react';
-import wide from '../../assets/MORPH_COVER.jpg';
+import WideImage from '../../assets/cover-wide.webp';
 import overhead from '../../assets/OVERHEAD.png';
 import entrance from '../../assets/ENTRANCE.png';
 import './styles/index.css'
-import { circle } from 'framer-motion/client';
+import { motion } from 'framer-motion';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
 
 const IndexView = () => {
-  const [closeView, setCloseView] = useState(false);
-  const [imageSource, setImageSource] = useState(entrance);
-
-  const handleClick = () => {
-    const firstImage = document.querySelector('.first-image');
-    const svgOverlay = document.querySelector('.svg-overlay')
-    const titleText = document.getElementById('title-text');
-    const textContent = document.querySelector('.text-content');
-
-    setCloseView(prev => !prev);
-    if (svgOverlay && firstImage && titleText) {
-
-      if (!closeView) {
-        firstImage.style.transition = 'transform 0.3s ease-in-out, opacity 1.2s ease-in-out';
-        svgOverlay.style.transition = 'opacity 0.5s ease-in-out';
-        svgOverlay.style.display = 'inline-block';
-
-        firstImage.style.transform = 'scale(2)';
-        firstImage.style.opacity = 0;
-
-        requestAnimationFrame(() => {
-          svgOverlay.style.opacity = 1;
-        });
-      }
-      else {
-        firstImage.style.transition = 'transform 0.3s ease-in-out, opacity 0.5s ease-in-out';
-        svgOverlay.style.transition = 'opacity 0.7s ease-in-out';
-        svgOverlay.style.opacity = 0;
-        firstImage.style.opacity = 1;
-        firstImage.style.transform = 'scale(1)';
-
-        setTimeout(() => {
-          svgOverlay.style.display = 'none';
-        }, 700);
-      }
-    }
-  }
-
   const handleHover = (id: string) => {
     const itemVals = {
       'D': { pointer: 'm3140 825 L3140 650 L3422 500', circleX: '3630', circleY: '430', textX: '3630', textY: '430', textVal: 'Makeup Influencer', linkX: '3630', linkY: '490' },
@@ -111,29 +76,137 @@ const IndexView = () => {
     }
   }
 
+  const handleImageChange = (direction: number) => { // direction is the way the user is travelling
+    const initialImageContainer = document.querySelector('.initial-image-container');
+    const initialImage = document.querySelector('.initial-image');
+    const svgOverlayContainer = document.querySelector('.svg-overlay-container');
+
+    if (direction == 0) {
+      initialImageContainer.style.display = 'block';
+
+      svgOverlayContainer.style.transition = 'opacity 0.5s ease-in-out, transform 0.3s ease-in-out';
+      initialImageContainer.style.transition = 'opacity 0.75s ease-in-out';
+      initialImage.style.transition = 'transform 0.3s ease-in-out';
+
+      requestAnimationFrame(() => {
+        svgOverlayContainer.style.opacity = 0;
+        initialImageContainer.style.opacity = 1;
+        initialImage.style.transform = 'scale(1)';
+      });
+
+      setTimeout(() => {
+        svgOverlayContainer.style.display = 'none';
+      }, 1000);
+    }
+    else if (direction == 1) {
+      initialImageContainer.style.transition = 'opacity 1.2s ease-in-out'
+      initialImage.style.transition = 'transform 0.3s ease-in-out';
+      svgOverlayContainer.style.transition = 'opacity 0.5s ease-in-out';
+      svgOverlayContainer.style.display = 'block';
+
+      initialImage.style.transform = 'scale(2)';
+      initialImageContainer.style.opacity = 0;
+
+      requestAnimationFrame(() => {
+        svgOverlayContainer.style.opacity = 1;
+      });
+
+      setTimeout(() => {
+        initialImageContainer.style.display = 'none';
+      }, 1000);
+    }
+  }
+
+  useEffect(() => {
+    gsap.to('.initial-image-container', {
+      scale: 2,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: ".scroll-container",
+        start: "top top",
+        end: "bottom top",
+        scrub: true
+      }
+    })
+
+    gsap.to('.title-container', {
+      z: 1500,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.scroll-container',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: true,
+      }
+    })
+
+    gsap.to('.subtitle-container', {
+      z: 800,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.scroll-container',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: true,
+      }
+    })
+
+    gsap.to('.svg-overlay-container', {
+      scale: 1.5,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: ".scroll-container",
+        start: "55% top",
+        end: "bottom bottom",
+        scrub: true
+      }
+    })
+
+    ScrollTrigger.create({
+      trigger: ".scroll-container",
+      start: "center top", // Adjust as needed
+      // markers: true,
+      onEnter: () => {
+        handleImageChange(1);
+      },
+      onLeaveBack: () => {
+        handleImageChange(0);
+      }
+    })
+  }, [])
+
   return (
-    <div className='test-container' onClick={() => handleClick()}>
-      <h1 id="title-text">MORPH</h1>
-      <img src={entrance} className='first-image'/>
-      <svg className="svg-overlay" viewBox="0 0 5120 2880" version="1.1" xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-        <defs>
-          <filter id="soft-glow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blurred" />
-            <feFlood floodColor="rgba(255, 255, 255, 0.7)" result="colored" />
-            <feComposite in2="blurred" operator="in" />
-            <feComposite in2="SourceAlpha" operator="in" />
-            <feComposite in2="colored" operator="over" />
-          </filter>
-          <filter id="circle-glow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blurred" />
-            <feFlood flood-color="rgba(204, 236, 250, 1)" flood-opacity="0.6" result="colored" />
-            <feComposite in="colored" in2="blurred" operator="in" result="softGlow_coloredBlur" />
-            <feMerge>
-              <feMergeNode in="softGlow_coloredBlur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
+    <div className='scroll-container'>
+      <div className='initial-image-container'>
+        <div className='title-container'>
+          <motion.h1
+            className='page-title'
+            id='cover-title'
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1 }}
+          >
+            COMPACT
+          </motion.h1>
+        </div>
+        <div className='subtitle-container'>
+          <motion.p
+            className='cover-subtitle'
+            id='cover-subtitle'
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 1.5, duration: 1 }}
+          >
+            Scroll to continue...
+          </motion.p>
+        </div>
+        <picture>
+          <source media="(min-width: 1024px)" srcSet={WideImage} />
+          {/* <source media="(min-width: 640px)" srcSet={WideImageMobile} /> */}
+          <img src={WideImage} className='initial-image' />
+        </picture>
+      </div>
+      <svg className="svg-overlay-container" viewBox="0 0 5120 2880" version="1.1" xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
         <g id="svg-bg-image">
           <image width="100%" height="100%" preserveAspectRatio="xMinYMin meet" xlinkHref={overhead} />
         </g>

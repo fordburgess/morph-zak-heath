@@ -12,9 +12,10 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as ServicesImport } from './routes/services'
-import { Route as LisaEldridgeImport } from './routes/lisaEldridge'
+import { Route as LisaEldridgeImport } from './routes/lisa-eldridge'
 import { Route as FeaturedImport } from './routes/featured'
-import { Route as BeautyIconsImport } from './routes/beautyIcons'
+import { Route as DreamRoomImport } from './routes/dream-room'
+import { Route as BeautyIconsImport } from './routes/beauty-icons'
 import { Route as AudioImport } from './routes/audio'
 import { Route as AdamReedImport } from './routes/adamReed'
 import { Route as IndexImport } from './routes/index'
@@ -28,8 +29,8 @@ const ServicesRoute = ServicesImport.update({
 } as any)
 
 const LisaEldridgeRoute = LisaEldridgeImport.update({
-  id: '/lisaEldridge',
-  path: '/lisaEldridge',
+  id: '/lisa-eldridge',
+  path: '/lisa-eldridge',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -39,9 +40,15 @@ const FeaturedRoute = FeaturedImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const DreamRoomRoute = DreamRoomImport.update({
+  id: '/dream-room',
+  path: '/dream-room',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const BeautyIconsRoute = BeautyIconsImport.update({
-  id: '/beautyIcons',
-  path: '/beautyIcons',
+  id: '/beauty-icons',
+  path: '/beauty-icons',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -88,11 +95,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AudioImport
       parentRoute: typeof rootRoute
     }
-    '/beautyIcons': {
-      id: '/beautyIcons'
-      path: '/beautyIcons'
-      fullPath: '/beautyIcons'
+    '/beauty-icons': {
+      id: '/beauty-icons'
+      path: '/beauty-icons'
+      fullPath: '/beauty-icons'
       preLoaderRoute: typeof BeautyIconsImport
+      parentRoute: typeof rootRoute
+    }
+    '/dream-room': {
+      id: '/dream-room'
+      path: '/dream-room'
+      fullPath: '/dream-room'
+      preLoaderRoute: typeof DreamRoomImport
       parentRoute: typeof rootRoute
     }
     '/featured': {
@@ -102,10 +116,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FeaturedImport
       parentRoute: typeof rootRoute
     }
-    '/lisaEldridge': {
-      id: '/lisaEldridge'
-      path: '/lisaEldridge'
-      fullPath: '/lisaEldridge'
+    '/lisa-eldridge': {
+      id: '/lisa-eldridge'
+      path: '/lisa-eldridge'
+      fullPath: '/lisa-eldridge'
       preLoaderRoute: typeof LisaEldridgeImport
       parentRoute: typeof rootRoute
     }
@@ -125,9 +139,10 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/adamReed': typeof AdamReedRoute
   '/audio': typeof AudioRoute
-  '/beautyIcons': typeof BeautyIconsRoute
+  '/beauty-icons': typeof BeautyIconsRoute
+  '/dream-room': typeof DreamRoomRoute
   '/featured': typeof FeaturedRoute
-  '/lisaEldridge': typeof LisaEldridgeRoute
+  '/lisa-eldridge': typeof LisaEldridgeRoute
   '/services': typeof ServicesRoute
 }
 
@@ -135,9 +150,10 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/adamReed': typeof AdamReedRoute
   '/audio': typeof AudioRoute
-  '/beautyIcons': typeof BeautyIconsRoute
+  '/beauty-icons': typeof BeautyIconsRoute
+  '/dream-room': typeof DreamRoomRoute
   '/featured': typeof FeaturedRoute
-  '/lisaEldridge': typeof LisaEldridgeRoute
+  '/lisa-eldridge': typeof LisaEldridgeRoute
   '/services': typeof ServicesRoute
 }
 
@@ -146,9 +162,10 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/adamReed': typeof AdamReedRoute
   '/audio': typeof AudioRoute
-  '/beautyIcons': typeof BeautyIconsRoute
+  '/beauty-icons': typeof BeautyIconsRoute
+  '/dream-room': typeof DreamRoomRoute
   '/featured': typeof FeaturedRoute
-  '/lisaEldridge': typeof LisaEldridgeRoute
+  '/lisa-eldridge': typeof LisaEldridgeRoute
   '/services': typeof ServicesRoute
 }
 
@@ -158,27 +175,30 @@ export interface FileRouteTypes {
     | '/'
     | '/adamReed'
     | '/audio'
-    | '/beautyIcons'
+    | '/beauty-icons'
+    | '/dream-room'
     | '/featured'
-    | '/lisaEldridge'
+    | '/lisa-eldridge'
     | '/services'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/adamReed'
     | '/audio'
-    | '/beautyIcons'
+    | '/beauty-icons'
+    | '/dream-room'
     | '/featured'
-    | '/lisaEldridge'
+    | '/lisa-eldridge'
     | '/services'
   id:
     | '__root__'
     | '/'
     | '/adamReed'
     | '/audio'
-    | '/beautyIcons'
+    | '/beauty-icons'
+    | '/dream-room'
     | '/featured'
-    | '/lisaEldridge'
+    | '/lisa-eldridge'
     | '/services'
   fileRoutesById: FileRoutesById
 }
@@ -188,6 +208,7 @@ export interface RootRouteChildren {
   AdamReedRoute: typeof AdamReedRoute
   AudioRoute: typeof AudioRoute
   BeautyIconsRoute: typeof BeautyIconsRoute
+  DreamRoomRoute: typeof DreamRoomRoute
   FeaturedRoute: typeof FeaturedRoute
   LisaEldridgeRoute: typeof LisaEldridgeRoute
   ServicesRoute: typeof ServicesRoute
@@ -198,6 +219,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdamReedRoute: AdamReedRoute,
   AudioRoute: AudioRoute,
   BeautyIconsRoute: BeautyIconsRoute,
+  DreamRoomRoute: DreamRoomRoute,
   FeaturedRoute: FeaturedRoute,
   LisaEldridgeRoute: LisaEldridgeRoute,
   ServicesRoute: ServicesRoute,
@@ -216,9 +238,10 @@ export const routeTree = rootRoute
         "/",
         "/adamReed",
         "/audio",
-        "/beautyIcons",
+        "/beauty-icons",
+        "/dream-room",
         "/featured",
-        "/lisaEldridge",
+        "/lisa-eldridge",
         "/services"
       ]
     },
@@ -231,14 +254,17 @@ export const routeTree = rootRoute
     "/audio": {
       "filePath": "audio.tsx"
     },
-    "/beautyIcons": {
-      "filePath": "beautyIcons.tsx"
+    "/beauty-icons": {
+      "filePath": "beauty-icons.tsx"
+    },
+    "/dream-room": {
+      "filePath": "dream-room.tsx"
     },
     "/featured": {
       "filePath": "featured.tsx"
     },
-    "/lisaEldridge": {
-      "filePath": "lisaEldridge.tsx"
+    "/lisa-eldridge": {
+      "filePath": "lisa-eldridge.tsx"
     },
     "/services": {
       "filePath": "services.tsx"
