@@ -58,8 +58,6 @@ body::before {
 
   h3 {
     font-family: 'Josefin Sans';
-    font-weight: 300;
-    font-size: 1.25rem;
   }
 
   img {
@@ -75,7 +73,7 @@ body::before {
 }
 
 .item-title {
-  font-weight: 300;
+  font-weight: 500;
   font-size: 1.25rem;
   transition: font-size 1s, margin 1s;
 }
@@ -85,8 +83,13 @@ body::before {
   opacity: 0;
   transition: opacity 1s;
   color: #000;
-  font-size: 0.5rem;
+  font-size: 0.35rem;
 }
+
+.associated-images {
+  transition: height 1s, width 1s;
+}
+
 
 .active-text-container {
   text-align: left;
