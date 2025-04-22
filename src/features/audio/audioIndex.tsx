@@ -8,17 +8,11 @@ import ZakHeath from '../../assets/zak-heath-profile.webp';
 import ShakeelMurtaza from '../../assets/shakeel-murtaza-profile.webp';
 import BenFrank from '../../assets/ben-frank.webp';
 import './styles/audio.css';
+import { Episode } from '../../types';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
-
-interface Episode {
-  title: string,
-  job: string,
-  profileImage: string | null,
-  description: string
-}
 
 const episodes = [
   {

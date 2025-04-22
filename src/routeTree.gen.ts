@@ -19,6 +19,7 @@ import { Route as BeautyIconsImport } from './routes/beauty-icons'
 import { Route as AudioImport } from './routes/audio'
 import { Route as AdamReedImport } from './routes/adamReed'
 import { Route as IndexImport } from './routes/index'
+import { Route as AudioIndexImport } from './routes/audio/index'
 
 // Create/Update Routes
 
@@ -68,6 +69,12 @@ const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const AudioIndexRoute = AudioIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AudioRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -130,43 +137,62 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesImport
       parentRoute: typeof rootRoute
     }
+    '/audio/': {
+      id: '/audio/'
+      path: '/'
+      fullPath: '/audio/'
+      preLoaderRoute: typeof AudioIndexImport
+      parentRoute: typeof AudioImport
+    }
   }
 }
 
 // Create and export the route tree
 
+interface AudioRouteChildren {
+  AudioIndexRoute: typeof AudioIndexRoute
+}
+
+const AudioRouteChildren: AudioRouteChildren = {
+  AudioIndexRoute: AudioIndexRoute,
+}
+
+const AudioRouteWithChildren = AudioRoute._addFileChildren(AudioRouteChildren)
+
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/adamReed': typeof AdamReedRoute
-  '/audio': typeof AudioRoute
+  '/audio': typeof AudioRouteWithChildren
   '/beauty-icons': typeof BeautyIconsRoute
   '/dream-room': typeof DreamRoomRoute
   '/featured': typeof FeaturedRoute
   '/lisa-eldridge': typeof LisaEldridgeRoute
   '/services': typeof ServicesRoute
+  '/audio/': typeof AudioIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/adamReed': typeof AdamReedRoute
-  '/audio': typeof AudioRoute
   '/beauty-icons': typeof BeautyIconsRoute
   '/dream-room': typeof DreamRoomRoute
   '/featured': typeof FeaturedRoute
   '/lisa-eldridge': typeof LisaEldridgeRoute
   '/services': typeof ServicesRoute
+  '/audio': typeof AudioIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/adamReed': typeof AdamReedRoute
-  '/audio': typeof AudioRoute
+  '/audio': typeof AudioRouteWithChildren
   '/beauty-icons': typeof BeautyIconsRoute
   '/dream-room': typeof DreamRoomRoute
   '/featured': typeof FeaturedRoute
   '/lisa-eldridge': typeof LisaEldridgeRoute
   '/services': typeof ServicesRoute
+  '/audio/': typeof AudioIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -180,16 +206,17 @@ export interface FileRouteTypes {
     | '/featured'
     | '/lisa-eldridge'
     | '/services'
+    | '/audio/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/adamReed'
-    | '/audio'
     | '/beauty-icons'
     | '/dream-room'
     | '/featured'
     | '/lisa-eldridge'
     | '/services'
+    | '/audio'
   id:
     | '__root__'
     | '/'
@@ -200,13 +227,14 @@ export interface FileRouteTypes {
     | '/featured'
     | '/lisa-eldridge'
     | '/services'
+    | '/audio/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdamReedRoute: typeof AdamReedRoute
-  AudioRoute: typeof AudioRoute
+  AudioRoute: typeof AudioRouteWithChildren
   BeautyIconsRoute: typeof BeautyIconsRoute
   DreamRoomRoute: typeof DreamRoomRoute
   FeaturedRoute: typeof FeaturedRoute
@@ -217,7 +245,7 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdamReedRoute: AdamReedRoute,
-  AudioRoute: AudioRoute,
+  AudioRoute: AudioRouteWithChildren,
   BeautyIconsRoute: BeautyIconsRoute,
   DreamRoomRoute: DreamRoomRoute,
   FeaturedRoute: FeaturedRoute,
@@ -252,7 +280,10 @@ export const routeTree = rootRoute
       "filePath": "adamReed.tsx"
     },
     "/audio": {
-      "filePath": "audio.tsx"
+      "filePath": "audio.tsx",
+      "children": [
+        "/audio/"
+      ]
     },
     "/beauty-icons": {
       "filePath": "beauty-icons.tsx"
@@ -268,6 +299,10 @@ export const routeTree = rootRoute
     },
     "/services": {
       "filePath": "services.tsx"
+    },
+    "/audio/": {
+      "filePath": "audio/index.tsx",
+      "parent": "/audio"
     }
   }
 }
