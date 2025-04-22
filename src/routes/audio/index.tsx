@@ -6,5 +6,10 @@ export const Route = createFileRoute('/audio/')({
 })
 
 function AudioLanding() {
-  return <AudioIndexView><Outlet /></AudioIndexView>
+  return (
+    <>
+      <AudioIndexView />
+      <Outlet />
+    </>
+  )
 }

@@ -286,7 +286,6 @@ const AudioIndexView = ({ children }: Props) => {
           }
         </div>
       </div>
-      {children}
     </>
   )
 }
