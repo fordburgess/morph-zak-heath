@@ -15,6 +15,10 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
+type Props = {
+  children?: React.ReactNode;
+};
+
 const episodes = [
   {
     id: 'patricia-bright',
@@ -53,7 +57,7 @@ const episodes = [
   }
 ]
 
-const AudioIndexView = () => {
+const AudioIndexView = ({ children }: Props) => {
   const horizontalScrollRef = useRef<HTMLDivElement | null>(null);
 
   const handleImageChange = (direction: number) => { // direction is the way the user is travelling
@@ -282,6 +286,7 @@ const AudioIndexView = () => {
           }
         </div>
       </div>
+      {children}
     </>
   )
 }

@@ -48,6 +48,7 @@ const EpisodeView = () => {
   const episode = episodes.find((episode: Episode) => episode.id == episodeId);
 
   if (episode) {
+    console.log(`Hello ${episode.title}`)
     return (
       <h1>{episode.title}</h1>
     )
