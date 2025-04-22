@@ -20,6 +20,8 @@ import { Route as AudioImport } from './routes/audio'
 import { Route as AdamReedImport } from './routes/adamReed'
 import { Route as IndexImport } from './routes/index'
 import { Route as AudioIndexImport } from './routes/audio/index'
+import { Route as AudioLayoutImport } from './routes/audio/_layout'
+import { Route as AudioEpisodeIdImport } from './routes/audio/$episodeId'
 
 // Create/Update Routes
 
@@ -74,6 +76,17 @@ const IndexRoute = IndexImport.update({
 const AudioIndexRoute = AudioIndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AudioRoute,
+} as any)
+
+const AudioLayoutRoute = AudioLayoutImport.update({
+  id: '/_layout',
+  getParentRoute: () => AudioRoute,
+} as any)
+
+const AudioEpisodeIdRoute = AudioEpisodeIdImport.update({
+  id: '/$episodeId',
+  path: '/$episodeId',
   getParentRoute: () => AudioRoute,
 } as any)
 
@@ -137,6 +150,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesImport
       parentRoute: typeof rootRoute
     }
+    '/audio/$episodeId': {
+      id: '/audio/$episodeId'
+      path: '/$episodeId'
+      fullPath: '/audio/$episodeId'
+      preLoaderRoute: typeof AudioEpisodeIdImport
+      parentRoute: typeof AudioImport
+    }
+    '/audio/_layout': {
+      id: '/audio/_layout'
+      path: ''
+      fullPath: '/audio'
+      preLoaderRoute: typeof AudioLayoutImport
+      parentRoute: typeof AudioImport
+    }
     '/audio/': {
       id: '/audio/'
       path: '/'
@@ -150,10 +177,14 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface AudioRouteChildren {
+  AudioEpisodeIdRoute: typeof AudioEpisodeIdRoute
+  AudioLayoutRoute: typeof AudioLayoutRoute
   AudioIndexRoute: typeof AudioIndexRoute
 }
 
 const AudioRouteChildren: AudioRouteChildren = {
+  AudioEpisodeIdRoute: AudioEpisodeIdRoute,
+  AudioLayoutRoute: AudioLayoutRoute,
   AudioIndexRoute: AudioIndexRoute,
 }
 
@@ -162,12 +193,13 @@ const AudioRouteWithChildren = AudioRoute._addFileChildren(AudioRouteChildren)
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/adamReed': typeof AdamReedRoute
-  '/audio': typeof AudioRouteWithChildren
+  '/audio': typeof AudioLayoutRoute
   '/beauty-icons': typeof BeautyIconsRoute
   '/dream-room': typeof DreamRoomRoute
   '/featured': typeof FeaturedRoute
   '/lisa-eldridge': typeof LisaEldridgeRoute
   '/services': typeof ServicesRoute
+  '/audio/$episodeId': typeof AudioEpisodeIdRoute
   '/audio/': typeof AudioIndexRoute
 }
 
@@ -179,6 +211,7 @@ export interface FileRoutesByTo {
   '/featured': typeof FeaturedRoute
   '/lisa-eldridge': typeof LisaEldridgeRoute
   '/services': typeof ServicesRoute
+  '/audio/$episodeId': typeof AudioEpisodeIdRoute
   '/audio': typeof AudioIndexRoute
 }
 
@@ -192,6 +225,8 @@ export interface FileRoutesById {
   '/featured': typeof FeaturedRoute
   '/lisa-eldridge': typeof LisaEldridgeRoute
   '/services': typeof ServicesRoute
+  '/audio/$episodeId': typeof AudioEpisodeIdRoute
+  '/audio/_layout': typeof AudioLayoutRoute
   '/audio/': typeof AudioIndexRoute
 }
 
@@ -206,6 +241,7 @@ export interface FileRouteTypes {
     | '/featured'
     | '/lisa-eldridge'
     | '/services'
+    | '/audio/$episodeId'
     | '/audio/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -216,6 +252,7 @@ export interface FileRouteTypes {
     | '/featured'
     | '/lisa-eldridge'
     | '/services'
+    | '/audio/$episodeId'
     | '/audio'
   id:
     | '__root__'
@@ -227,6 +264,8 @@ export interface FileRouteTypes {
     | '/featured'
     | '/lisa-eldridge'
     | '/services'
+    | '/audio/$episodeId'
+    | '/audio/_layout'
     | '/audio/'
   fileRoutesById: FileRoutesById
 }
@@ -282,6 +321,8 @@ export const routeTree = rootRoute
     "/audio": {
       "filePath": "audio.tsx",
       "children": [
+        "/audio/$episodeId",
+        "/audio/_layout",
         "/audio/"
       ]
     },
@@ -299,6 +340,14 @@ export const routeTree = rootRoute
     },
     "/services": {
       "filePath": "services.tsx"
+    },
+    "/audio/$episodeId": {
+      "filePath": "audio/$episodeId.tsx",
+      "parent": "/audio"
+    },
+    "/audio/_layout": {
+      "filePath": "audio/_layout.tsx",
+      "parent": "/audio"
     },
     "/audio/": {
       "filePath": "audio/index.tsx",
