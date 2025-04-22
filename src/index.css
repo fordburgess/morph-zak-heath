@@ -46,6 +46,11 @@ h1, h2, h3, h4, h5, h6, p {
   font-family: 'Josefin Sans';
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .scroll-container {
   height: 1000vh;
   width: 100vw;
