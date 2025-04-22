@@ -262,14 +262,16 @@ const AudioIndexView = () => {
       </div>
       <div className='content-container'>
         <img className='content-container-background' src={ExpandedImage} />
-        <div className='profile-container' ref={horizontalScrollRef}>
+        <div className='profile-scroll-container' ref={horizontalScrollRef}>
           {
             episodes.map((episode: Episode) => {
-
-
               return (
-                <div className='profile-circle'>
+                <div className='profile-container'>
                   <img className='profile-image' src={episode.profileImage ? episode.profileImage : BenFrank} alt='pfp'/>
+                  <div id='podcast-index-info-container'>
+                    <h2 id="podcast-index-title">{episode.title.split(':')[0]}</h2>
+                    <p id="podcast-index-job">{episode.job}</p>
+                  </div>
                 </div>
               )
             })

@@ -9,3 +9,32 @@
   font-size: 2rem;
   font-weight: 300;
 }
+
+#podcast-index-info-container {
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  transition: background-color 0.3s, backdrop-filter 0.3s;
+}
+
+.profile-container:hover {
+  cursor: pointer;
+
+  #podcast-index-info-container {
+    background-color: rgba(113, 113, 113, 0.103);
+    backdrop-filter: blur(10px);
+  }
+}
+
+
+#podcast-index-title {
+  font-weight: 300;
+  font-size: 2rem;
+  line-height: 2rem;
+}
+
+#podcast-index-job {
+  color: #000000c5;
+  font-size: 1.25rem;
+  font-weight: 500;
+}

@@ -176,7 +176,7 @@ h1, h2, h3, h4, h5, h6, p {
   object-position: center;
 }
 
-.profile-container {
+.profile-scroll-container {
   height: 100%;
   width: 100%;
   position: absolute;
@@ -187,25 +187,27 @@ h1, h2, h3, h4, h5, h6, p {
   overflow-x: auto;
   overflow-y: hidden;
   z-index: 100;
-  padding: 0 100px;
+  /* padding: 0 100px; */
   box-sizing: border-box;
 }
 
-.profile-circle {
-  flex: 0 0 auto; /* Ensure it doesn't shrink */
-  height: 400px;
-  width: 400px;
-  border-radius: 50%;
-  overflow: hidden;
+.profile-container {
+  width: 33vw;
+  padding: 50px 0;
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 33vw;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
 }
 
-.profile-circle:not(:last-child) {
-  margin-right: 100px;
-}
 
 .profile-image {
-  height: 100%;
-  width: 100%;
+  height: 300px;
+  width: 300px;
+  margin-bottom: 10px;
+  border-radius: 50%;
   object-fit: cover;
   object-position: center;
 }
